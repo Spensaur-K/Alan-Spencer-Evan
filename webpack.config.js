@@ -14,12 +14,15 @@ module.exports = {
   entry: "./client/main.js",
 
   output: {
-    path: path.join(__dirname, "dist"),
+    path: path.join(__dirname, "public/app"),
     filename: "bundle.js"
   },
 
   resolve: {
-    extensions: ['', '.js', '.ts', '.css', 'scss']
+    extensions: ['', '.js', '.css', 'scss', '.html', '.hbs'],
+    alias: {
+      'handlebars': 'handlebars/runtime'
+    }
   },
 
   module: {

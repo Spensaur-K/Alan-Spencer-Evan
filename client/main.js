@@ -1,4 +1,7 @@
+import { navigate } from "./navigate";
 "use strict";
+
+navigate("home");
 
 console.log("hello word");
 
