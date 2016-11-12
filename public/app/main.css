@@ -1,0 +1,20 @@
+/*!
+ * --------------------------------------------------------------------------------
+ * Author: Spencer Killen & Alan Yong
+ * Date: Sat Nov 12 2016
+ * --------------------------------------------------------------------------------
+ */
+.buy.button {
+  background-image: url("/assets/coffee.jpg");
+  width: 400px;
+  height: 600px;
+  background-size: cover;
+  display: inline-block; }
+
+.home-page {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  height: 0px; }
