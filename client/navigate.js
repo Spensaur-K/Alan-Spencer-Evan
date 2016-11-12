@@ -1,8 +1,11 @@
 import $ from "jquery";
 
 const viewLoader = require.context("./views"),
+	  controllerLoader = require.context("./controllers"),
 	  pageElement = $("#page");
 
-export function navigate(path) {
-	pageElement.html(viewLoader(`./${path}`, {}));
+export function navigate(path, ctx = {}) {
+	const file = `./${path}`;
+	pageElement.html(viewLoader(file), ctx);
+	controllerLoader(file)(ctx);
 }

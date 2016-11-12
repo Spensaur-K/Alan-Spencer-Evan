@@ -58,7 +58,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	__webpack_require__(5);
+	__webpack_require__(8);
 
 	"use strict";
 
@@ -99,10 +99,15 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var viewLoader = __webpack_require__(3),
+	    controllerLoader = __webpack_require__(5),
 	    pageElement = (0, _jquery2.default)("#page");
 
 	function navigate(path) {
-		pageElement.html(viewLoader("./" + path, {}));
+		var ctx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		var file = "./" + path;
+		pageElement.html(viewLoader(file), ctx);
+		controllerLoader(file)(ctx);
 	}
 
 /***/ },
@@ -10364,8 +10369,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./home.": 6,
-		"./home.scss": 6
+		"./home": 6,
+		"./home.js": 6
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -10383,6 +10388,63 @@
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	var _sockets = __webpack_require__(7);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	module.exports = function () {
+	        (0, _jquery2.default)(".buy.button").click(function (e) {
+	                (0, _sockets.order)();
+	        });
+	};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var socket = io.connect();
+
+	exports.order = function () {
+	        socket.emit("order", {
+	                type: "coffee",
+	                from: "Tim Hortens"
+	        });
+	};
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./home.": 9,
+		"./home.scss": 9
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 8;
+
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
