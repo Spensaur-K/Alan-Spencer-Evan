@@ -24,11 +24,19 @@
     "node": ">=6.1.0"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-sslify": "^1.1.0",
     "handlebars": "^4.0.5",
+    "helmet": "^3.1.0",
+    "keystone": "^4.0.0-beta.3",
     "mongodb": "^2.2.11",
+    "mongoose": "^4.6.7",
     "request": "^2.78.0",
     "request-promise-native": "^1.0.3",
-    "socket.io": "^1.5.1"
+    "socket.io": "^1.5.1",
+    "socket.io-adapter-mongo": "^0.1.6",
+    "throng": "^4.0.0"
   }
 }
