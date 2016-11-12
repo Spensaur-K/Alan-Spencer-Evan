@@ -11,7 +11,7 @@ const BANNER = require("./banner"),
       PACKAGE = require("./package.json");
 
 module.exports = {
-  entry: "./src/main.js",
+  entry: "./client/main.js",
 
   output: {
     path: path.join(__dirname, "dist"),
@@ -47,7 +47,7 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin(BANNER, {entryOnly: true}),
     new HtmlWebpackPlugin({
-      template: "src/index.ejs",
+      template: "client/index.ejs",
       title: PACKAGE.name
     }),
     new ExtractTextPlugin("[name].css"),
