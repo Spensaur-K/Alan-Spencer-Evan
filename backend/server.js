@@ -4,6 +4,7 @@ var app = express();
 var server = http.createServer(app).listen(3000);
 var io = require("socket.io")(server);
 var path = require("path");
+var coffee = require("./requests/coffees");
 
 app.use(express.static(path.join(__dirname, "../public")));
 
@@ -13,15 +14,15 @@ io.on("connection", function(socket) {
     	socket.broadcast.emit("message", message);
     });
 
-    socket.on("order", function(number) {
+    socket.on("order", function(order) {
 
-        console.log(number);
-
+        console.log(order);
+        coffee.createTask(order);
         //socket.broadcast.emit("order", number);
     });
 	//socket.emit("message", "Welcome to Cyber Chat");
 
-    
+
 
 
 

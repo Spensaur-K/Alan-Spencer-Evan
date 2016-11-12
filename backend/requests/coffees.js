@@ -9,7 +9,7 @@ module.exports.createTask = function(req) {
         "description": "From " + req.from
     }};
 
-    return request({
+    request({
         method: 'POST',
         url: 'https://api.getjobber.com/api/basic_tasks',
         headers: {
@@ -24,6 +24,5 @@ module.exports.createTask = function(req) {
         console.log('Headers:', JSON.stringify(response.headers));
         console.log('Response:', response.body);
         console.log(response);
-        return response;
     });
 };
