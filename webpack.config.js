@@ -19,10 +19,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.css', 'scss', '.html', '.hbs'],
-    alias: {
-      'handlebars': 'handlebars/runtime'
-    }
+    extensions: ['', '.js', '.ts', '.css', 'scss']
   },
 
   module: {
