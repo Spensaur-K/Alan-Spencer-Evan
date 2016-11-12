@@ -13,7 +13,18 @@ io.on("connection", function(socket) {
     	socket.broadcast.emit("message", message);
     });
 
-	socket.emit("message", "Welcome to Cyber Chat");
+    socket.on("order", function(number) {
+
+        console.log(number);
+
+        //socket.broadcast.emit("order", number);
+    });
+	//socket.emit("message", "Welcome to Cyber Chat");
+
+    
+
+
+
 
 });
 
