@@ -3,6 +3,10 @@ import { order, socket } from "./../sockets";
 import loading from "./../loading";
 
 export function create() {
+        $("#creme-display").height(($("#creme").val()/100)*900);
+        $("#creme").change(e => {
+                $("#creme-display").height(($("#creme").val()/100)*900)
+        });
         socket.on("jobcreate", (jid) => {
                 loading.off();
                 $(".feedback").append(`<div>Job with id ${jid} created successfully</div>`);
@@ -15,31 +19,30 @@ export function create() {
         });
         //clc location
         $(".buy.button").click(e => {
-                loading.on();
-                if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                                var lat = position.coords.latitude;
-                                var long = position.coords.longitude;
+                if (confirm("Confirm Order?")) {
+                        loading.on();
+                        if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function (position) {
+                                        var lat = position.coords.latitude;
+                                        var long = position.coords.longitude;
 
+                                        order({
+                                                type: $("#coffee").val(),
+                                                from: $("#shop").val(),
+                                                lat: lat,
+                                                long: long
+                                        });
+
+                                });
+                        } else {
+                                // "Geolocation is not supported by this browser.";
                                 order({
                                         type: $("#coffee").val(),
                                         from: $("#shop").val(),
-                                        lat: lat,
-                                        long: long
+                                        lat: 9001,
+                                        long: 9001
                                 });
-
-                        });
-                } else {
-                        // "Geolocation is not supported by this browser.";
-                        var lat = 0;
-                        var long = 0;
-                        order({
-                                type: "coffee",
-                                from: "somehwere (timmies)",
-                                lat: lat,
-                                long: long
-                        });
-
+                        }
                 }
 
         });

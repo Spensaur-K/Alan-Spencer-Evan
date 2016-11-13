@@ -16,8 +16,8 @@ export function create() {
         $(".button.login").click(e => {
                 loading.on();
                 login(
-                    $("#username").val(),
-                    $("#password").val()
+                        $("#username").val(),
+                        $("#password").val()
                 );
         });
 };

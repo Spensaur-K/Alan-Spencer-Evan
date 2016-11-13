@@ -54,7 +54,7 @@
 
 	var _navigate = __webpack_require__(1);
 
-	__webpack_require__(29);
+	__webpack_require__(30);
 
 	"use strict";
 
@@ -10372,7 +10372,7 @@
 	    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
 	    + "</div>\r\n<div>password: "
 	    + alias4(((helper = (helper = helpers.password || (depth0 != null ? depth0.password : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"password","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
+	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button hvr-buzz-out\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
 	},"useData":true});
 
 /***/ },
@@ -11559,7 +11559,7 @@
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper;
 
-	  return "<div class=\"login\" />\r\n        <h1>Enter Credentials</h1>\r\n        <input id=\"username\" type=\"username\" />\r\n        <input id=\"password\" type=\"password\" />\r\n        <button class=\"button login\" >Login</button>\r\n        "
+	  return "<div class=\"login\" />\r\n        <h1>Enter Credentials</h1>\r\n        <input id=\"username\" type=\"username\" />\r\n        <input id=\"password\" type=\"password\" />\r\n        <button class=\"button login\" >Login</button>\r\n        <br />\r\n        <input id=\"name\" type=\"name\" />\r\n        <button class=\"button signup\" >Sign up</button>\r\n        "
 	    + container.escapeExpression(((helper = (helper = helpers.status || (depth0 != null ? depth0.status : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"status","hash":{},"data":data}) : helper)))
 	    + "\r\n</div>";
 	},"useData":true});
@@ -11571,8 +11571,8 @@
 	var map = {
 		"./home": 26,
 		"./home.js": 26,
-		"./login": 28,
-		"./login.js": 28
+		"./login": 29,
+		"./login.js": 29
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -11606,13 +11606,17 @@
 
 	var _sockets = __webpack_require__(27);
 
-	var _loading = __webpack_require__(34);
+	var _loading = __webpack_require__(28);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function create() {
+	        (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
+	        (0, _jquery2.default)("#creme").change(function (e) {
+	                (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
+	        });
 	        _sockets.socket.on("jobcreate", function (jid) {
 	                _loading2.default.off();
 	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " created successfully</div>");
@@ -11625,29 +11629,29 @@
 	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
-	                _loading2.default.on();
-	                if (navigator.geolocation) {
-	                        navigator.geolocation.getCurrentPosition(function (position) {
-	                                var lat = position.coords.latitude;
-	                                var long = position.coords.longitude;
+	                if (confirm("Confirm Order?")) {
+	                        _loading2.default.on();
+	                        if (navigator.geolocation) {
+	                                navigator.geolocation.getCurrentPosition(function (position) {
+	                                        var lat = position.coords.latitude;
+	                                        var long = position.coords.longitude;
 
+	                                        (0, _sockets.order)({
+	                                                type: (0, _jquery2.default)("#coffee").val(),
+	                                                from: (0, _jquery2.default)("#shop").val(),
+	                                                lat: lat,
+	                                                long: long
+	                                        });
+	                                });
+	                        } else {
+	                                // "Geolocation is not supported by this browser.";
 	                                (0, _sockets.order)({
 	                                        type: (0, _jquery2.default)("#coffee").val(),
 	                                        from: (0, _jquery2.default)("#shop").val(),
-	                                        lat: lat,
-	                                        long: long
+	                                        lat: 9001,
+	                                        long: 9001
 	                                });
-	                        });
-	                } else {
-	                        // "Geolocation is not supported by this browser.";
-	                        var lat = 0;
-	                        var long = 0;
-	                        (0, _sockets.order)({
-	                                type: "coffee",
-	                                from: "somehwere (timmies)",
-	                                lat: lat,
-	                                long: long
-	                        });
+	                        }
 	                }
 	        });
 	};
@@ -11687,6 +11691,31 @@
 	Object.defineProperty(exports, "__esModule", {
 	        value: true
 	});
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	        off: function off() {
+	                (0, _jquery2.default)("#loading").css("display", "none");
+	        },
+	        on: function on() {
+	                (0, _jquery2.default)("#loading").css("display", "block");
+	        }
+	};
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
 	exports.create = create;
 	exports.destroy = destroy;
 
@@ -11698,7 +11727,7 @@
 
 	var _navigate = __webpack_require__(1);
 
-	var _loading = __webpack_require__(34);
+	var _loading = __webpack_require__(28);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
@@ -11724,12 +11753,12 @@
 	}
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./home.": 30,
-		"./home.scss": 30
+		"./home.": 31,
+		"./home.scss": 31
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -11742,42 +11771,14 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 29;
+	webpackContext.id = 30;
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	        value: true
-	});
-
-	var _jquery = __webpack_require__(2);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	        off: function off() {
-	                (0, _jquery2.default)("#loading").css("display", "none");
-	        },
-	        on: function on() {
-	                (0, _jquery2.default)("#loading").css("display", "block");
-	        }
-	};
 
 /***/ }
 /******/ ]);

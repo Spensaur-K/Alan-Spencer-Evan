@@ -25,6 +25,29 @@ img {
         top: 40%;
 }
 
+.creme-control {
+        position: fixed;
+        right: 30px;
+        top: 100px;
+}
+
+#creme-display {
+        background-image: url("/assets/creme.jpg");
+        background-repeat: repeat-y;
+        display: inline-block;
+        height: 700px;
+        width: 125px;
+}
+
+input[type=range][orient=vertical]
+{
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; /* WebKit */
+    width: 8px;
+    height: 900px;
+    padding: 0 5px;
+}
+
 .feedback {
         position: fixed;
         left: 0px;
