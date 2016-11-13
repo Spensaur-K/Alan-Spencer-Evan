@@ -34,6 +34,7 @@ io.on("connection", function (socket) {
 
     socket.on("login", function (message) {
         if (message.username == 'spencer' && message.password == 'password1') {
+            
             console.log("Auth success");
             socket.on("chat", function (message) {
                 socket.broadcast.emit("message", message);
@@ -42,7 +43,7 @@ io.on("connection", function (socket) {
             socket.on("order", function (order) {
 
                 console.log(order);
-                jobs.createJob(order)
+                jobs.createJob(order, socket.cid)
                     .then(({job}) => {
                         jobStorage.awaitingPickup.add(job.id);
                         socket.emit("jobcreate", job.id);

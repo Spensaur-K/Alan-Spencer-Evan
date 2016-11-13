@@ -10,8 +10,8 @@ const HEADERS = {
     'X-API-ACCESS-TOKEN': accesstoken
 };
 
-module.exports.createJob = function(req) {
-    return properties.createProperty({lat: req.lat, long: req.long}).then(function(property) {
+module.exports.createJob = function(req, cid) {
+    return properties.createProperty({lat: req.lat, long: req.long}, cid).then(function(property) {
         var task = { job : {
             scheduling_details: "Order " + req.type + " from " + req.from,
             schedule_type: "one-off",
