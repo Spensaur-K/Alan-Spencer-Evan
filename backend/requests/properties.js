@@ -51,7 +51,7 @@ module.exports.createProperty = function(coords, clientId) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
-                if (prop.street1 === property.property.street1 && prop.city === property.property.city && prop.client === property.client) {
+                if (prop.street1 === property.property.street1 && prop.city === property.property.city && prop.client.id === property.property.client) {
                     console.log("Already exists");
                     console.log(prop);
                     return prop;
