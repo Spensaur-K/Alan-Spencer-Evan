@@ -54,7 +54,7 @@
 
 	var _navigate = __webpack_require__(1);
 
-	__webpack_require__(30);
+	__webpack_require__(31);
 
 	"use strict";
 
@@ -76,10 +76,14 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
+	var _items = __webpack_require__(3);
+
+	var _items2 = _interopRequireDefault(_items);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var viewLoader = __webpack_require__(3),
-	    controllerLoader = __webpack_require__(25),
+	var viewLoader = __webpack_require__(4),
+	    controllerLoader = __webpack_require__(26),
 	    pageElement = (0, _jquery2.default)("#page");
 
 	var currentView = null;
@@ -90,7 +94,7 @@
 		var file = "./" + path;
 		var template = viewLoader(file + ".hbs");
 		if (typeof template === "function") {
-			template = template(ctx);
+			template = template(Object.assign(ctx, _items2.default));
 		}
 		pageElement.html(template);
 		if (currentView !== null) {
@@ -10337,13 +10341,45 @@
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"items": [
+			{
+				"type": "Barely Coffee",
+				"cost": 5
+			},
+			{
+				"type": "Dark Roast",
+				"cost": 10
+			},
+			{
+				"type": "Light Roast",
+				"cost": 30
+			}
+		],
+		"shops": [
+			{
+				"name": "Timmy's"
+			},
+			{
+				"name": "Jimmy's"
+			},
+			{
+				"name": "Denny's"
+			}
+		]
+	};
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./home": 4,
-		"./home.hbs": 4,
-		"./login": 24,
-		"./login.hbs": 24
+		"./home": 5,
+		"./home.hbs": 5,
+		"./login": 25,
+		"./login.hbs": 25
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -10356,34 +10392,54 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 3;
+	webpackContext.id = 4;
 
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Handlebars = __webpack_require__(5);
-	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
-	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var helper;
-
-	  return "<div>username: "
-	    + container.escapeExpression(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"username","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Dark Roast\">Dark Roast</option>\r\n                        <option value=\"Mild Roast\">Mild Roast</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class=\"spacing\"></div>\r\n<div class=\"row\">\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves.png\">\r\n        </div>\r\n        <div class=\"col-6 col-m-4 col-p-4\">\r\n                <div class=\"buy button\">\r\n                        <img src=\"/assets/coffeeCup.png\" class=\"cup\">\r\n                </div>\r\n                <div class=\"creme-control\">\r\n                        <div id=\"creme-display\"></div>\r\n                        <input id=\"creme\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n                <div class=\"sugar-control\">\r\n                        <div id=\"sugar-display\"></div>\r\n                        <input id=\"sugar\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves2.png\">\r\n        </div>\r\n\r\n        <div class=\"feedback\">\r\n\r\n        </div>";
-	},"useData":true});
 
 /***/ },
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Create a simple path alias to allow browserify to resolve
-	// the runtime on a supported path.
-	module.exports = __webpack_require__(6)['default'];
+	var Handlebars = __webpack_require__(6);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"1":function(container,depth0,helpers,partials,data) {
+	    var alias1=container.lambda, alias2=container.escapeExpression;
 
+	  return "                                <option value=\""
+	    + alias2(alias1((depth0 != null ? depth0.type : depth0), depth0))
+	    + "\">"
+	    + alias2(alias1((depth0 != null ? depth0.type : depth0), depth0))
+	    + "</option>\r\n";
+	},"3":function(container,depth0,helpers,partials,data) {
+	    var alias1=container.lambda, alias2=container.escapeExpression;
+
+	  return "                                <option value=\""
+	    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+	    + "\">"
+	    + alias2(alias1((depth0 != null ? depth0.name : depth0), depth0))
+	    + "</option>\r\n";
+	},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1, helper, alias1=depth0 != null ? depth0 : {};
+
+	  return "<div>username: "
+	    + container.escapeExpression(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
+	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n"
+	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.items : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n"
+	    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.shops : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+	    + "                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class=\"spacing\"></div>\r\n<div class=\"row\">\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves.png\">\r\n        </div>\r\n        <div class=\"col-6 col-m-4 col-p-4\">\r\n                <div class=\"buy button\">\r\n                        <img src=\"/assets/coffeeCup.png\" class=\"cup\">\r\n                </div>\r\n                <div class=\"creme-control\">\r\n                        <div id=\"creme-display\"></div>\r\n                        <input id=\"creme\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n                <div class=\"sugar-control\">\r\n                        <div id=\"sugar-display\"></div>\r\n                        <input id=\"sugar\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves2.png\">\r\n        </div>\r\n\r\n        <div class=\"feedback\">\r\n\r\n        </div>";
+	},"useData":true});
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Create a simple path alias to allow browserify to resolve
+	// the runtime on a supported path.
+	module.exports = __webpack_require__(7)['default'];
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10397,30 +10453,30 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _handlebarsBase = __webpack_require__(7);
+	var _handlebarsBase = __webpack_require__(8);
 
 	var base = _interopRequireWildcard(_handlebarsBase);
 
 	// Each of these augment the Handlebars object. No need to setup here.
 	// (This is done to easily share code between commonjs and browse envs)
 
-	var _handlebarsSafeString = __webpack_require__(21);
+	var _handlebarsSafeString = __webpack_require__(22);
 
 	var _handlebarsSafeString2 = _interopRequireDefault(_handlebarsSafeString);
 
-	var _handlebarsException = __webpack_require__(9);
+	var _handlebarsException = __webpack_require__(10);
 
 	var _handlebarsException2 = _interopRequireDefault(_handlebarsException);
 
-	var _handlebarsUtils = __webpack_require__(8);
+	var _handlebarsUtils = __webpack_require__(9);
 
 	var Utils = _interopRequireWildcard(_handlebarsUtils);
 
-	var _handlebarsRuntime = __webpack_require__(22);
+	var _handlebarsRuntime = __webpack_require__(23);
 
 	var runtime = _interopRequireWildcard(_handlebarsRuntime);
 
-	var _handlebarsNoConflict = __webpack_require__(23);
+	var _handlebarsNoConflict = __webpack_require__(24);
 
 	var _handlebarsNoConflict2 = _interopRequireDefault(_handlebarsNoConflict);
 
@@ -10455,7 +10511,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10466,17 +10522,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
-	var _exception = __webpack_require__(9);
+	var _exception = __webpack_require__(10);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _helpers = __webpack_require__(10);
+	var _helpers = __webpack_require__(11);
 
-	var _decorators = __webpack_require__(18);
+	var _decorators = __webpack_require__(19);
 
-	var _logger = __webpack_require__(20);
+	var _logger = __webpack_require__(21);
 
 	var _logger2 = _interopRequireDefault(_logger);
 
@@ -10565,7 +10621,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10695,7 +10751,7 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10752,7 +10808,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10763,31 +10819,31 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _helpersBlockHelperMissing = __webpack_require__(11);
+	var _helpersBlockHelperMissing = __webpack_require__(12);
 
 	var _helpersBlockHelperMissing2 = _interopRequireDefault(_helpersBlockHelperMissing);
 
-	var _helpersEach = __webpack_require__(12);
+	var _helpersEach = __webpack_require__(13);
 
 	var _helpersEach2 = _interopRequireDefault(_helpersEach);
 
-	var _helpersHelperMissing = __webpack_require__(13);
+	var _helpersHelperMissing = __webpack_require__(14);
 
 	var _helpersHelperMissing2 = _interopRequireDefault(_helpersHelperMissing);
 
-	var _helpersIf = __webpack_require__(14);
+	var _helpersIf = __webpack_require__(15);
 
 	var _helpersIf2 = _interopRequireDefault(_helpersIf);
 
-	var _helpersLog = __webpack_require__(15);
+	var _helpersLog = __webpack_require__(16);
 
 	var _helpersLog2 = _interopRequireDefault(_helpersLog);
 
-	var _helpersLookup = __webpack_require__(16);
+	var _helpersLookup = __webpack_require__(17);
 
 	var _helpersLookup2 = _interopRequireDefault(_helpersLookup);
 
-	var _helpersWith = __webpack_require__(17);
+	var _helpersWith = __webpack_require__(18);
 
 	var _helpersWith2 = _interopRequireDefault(_helpersWith);
 
@@ -10804,14 +10860,14 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('blockHelperMissing', function (context, options) {
@@ -10849,7 +10905,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10859,9 +10915,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
-	var _exception = __webpack_require__(9);
+	var _exception = __webpack_require__(10);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -10949,7 +11005,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10959,7 +11015,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _exception = __webpack_require__(9);
+	var _exception = __webpack_require__(10);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
@@ -10980,14 +11036,14 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('if', function (conditional, options) {
@@ -11015,7 +11071,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11047,7 +11103,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11065,14 +11121,14 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	exports['default'] = function (instance) {
 	  instance.registerHelper('with', function (context, options) {
@@ -11104,7 +11160,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11115,7 +11171,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _decoratorsInline = __webpack_require__(19);
+	var _decoratorsInline = __webpack_require__(20);
 
 	var _decoratorsInline2 = _interopRequireDefault(_decoratorsInline);
 
@@ -11126,14 +11182,14 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	exports['default'] = function (instance) {
 	  instance.registerDecorator('inline', function (fn, props, container, options) {
@@ -11161,14 +11217,14 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	exports.__esModule = true;
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	var logger = {
 	  methodMap: ['debug', 'info', 'warn', 'error'],
@@ -11214,7 +11270,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// Build out our basic SafeString type
@@ -11235,7 +11291,7 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11255,15 +11311,15 @@
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
-	var _utils = __webpack_require__(8);
+	var _utils = __webpack_require__(9);
 
 	var Utils = _interopRequireWildcard(_utils);
 
-	var _exception = __webpack_require__(9);
+	var _exception = __webpack_require__(10);
 
 	var _exception2 = _interopRequireDefault(_exception);
 
-	var _base = __webpack_require__(7);
+	var _base = __webpack_require__(8);
 
 	function checkRevision(compilerInfo) {
 	  var compilerRevision = compilerInfo && compilerInfo[0] || 1,
@@ -11538,7 +11594,7 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
@@ -11565,10 +11621,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Handlebars = __webpack_require__(5);
+	var Handlebars = __webpack_require__(6);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper;
@@ -11579,14 +11635,14 @@
 	},"useData":true});
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./home": 26,
-		"./home.js": 26,
-		"./login": 29,
-		"./login.js": 29
+		"./home": 27,
+		"./home.js": 27,
+		"./login": 30,
+		"./login.js": 30
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -11599,11 +11655,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 25;
+	webpackContext.id = 26;
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11618,9 +11674,9 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _sockets = __webpack_require__(27);
+	var _sockets = __webpack_require__(28);
 
-	var _loading = __webpack_require__(28);
+	var _loading = __webpack_require__(29);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
@@ -11683,7 +11739,7 @@
 	}
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -11704,7 +11760,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11729,7 +11785,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -11744,11 +11800,11 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _sockets = __webpack_require__(27);
+	var _sockets = __webpack_require__(28);
 
 	var _navigate = __webpack_require__(1);
 
-	var _loading = __webpack_require__(28);
+	var _loading = __webpack_require__(29);
 
 	var _loading2 = _interopRequireDefault(_loading);
 
@@ -11792,12 +11848,12 @@
 	}
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./home.": 31,
-		"./home.scss": 31
+		"./home.": 32,
+		"./home.scss": 32
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -11810,11 +11866,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 30;
+	webpackContext.id = 31;
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

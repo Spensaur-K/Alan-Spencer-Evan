@@ -1,13 +1,13 @@
 {
   "items": [
-    {"type": "Black", "cost": 5.00},
-    {"type": "Double Double", "cost": 10.00}
-    {"type": "Sextuple Sextuple", "cost": 30.00}
+    {"type": "Barely Coffee", "cost": 5.00},
+    {"type": "Dark Roast", "cost": 10.00},
+    {"type": "Light Roast", "cost": 30.00}
     ],
 
   "shops": [
     {"name": "Timmy's"},
-    {"name": "Not Timmy's"},
-    {"name": "Not Timmy's But It Secretly Is"}
+    {"name": "Jimmy's"},
+    {"name": "Denny's"}
   ]
 }

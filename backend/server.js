@@ -26,7 +26,6 @@ var path = require("path");
 var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
 const field = require("./requests/customFields");
-var items = require("./items.json");
 const psuedobool = require("./requests/psuedobool");
 const clients = require("./requests/clients");
 const socketToJobs = new WeakMap();

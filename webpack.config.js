@@ -33,6 +33,11 @@ module.exports = {
         loader: 'babel?{presets: "es2015"}',
       },
       {
+        test: /\.json$/,
+        exclude: /node_modules/,
+        loader: 'json',
+      },
+      {
         test: /\.html$/,
         loader: 'html'
       },
