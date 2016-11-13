@@ -13,6 +13,8 @@ webhooks.post("/job_done", (req, res, next) => {
 webhooks.use(bodyParser.json());
 
 webhooks.post("/job_done", (req, res, next) => {
+
+        console.log(typeof req.body);
         console.log(req.body);
 });
 
