@@ -7,7 +7,8 @@
 body {
   width: 100%;
   margin: auto;
-  background: #EB712F; }
+  background: #EB712F;
+  font-size: 40px; }
 
 img {
   max-width: 100%;
@@ -20,10 +21,16 @@ img {
   to {
     opacity: 1; } }
 
+#loading {
+  display: none;
+  position: fixed;
+  left: 40%;
+  top: 40%; }
+
 .feedback {
   position: fixed;
   left: 0px;
-  top: 100px;
+  top: 250px;
   width: 700px;
   text-align: center;
   max-height: 500px;
@@ -60,22 +67,16 @@ img {
   top: 0px;
   height: 0px; }
 
-#coffee {
+#coffee, #shop {
   border: solid black 3px;
   border-radius: 30px;
   padding: 5px;
-  font-size: 24px; }
-
-#shop {
-  border: solid black 3px;
-  border-radius: 30px;
-  padding: 5px;
-  font-size: 24px; }
+  font-size: 90px; }
 
 p {
   display: inline-block;
   padding: 5px;
-  font-size: 24px;
+  font-size: 50px;
   color: #333333;
   font-family: "Arial Black", Gadget, sans-serif;
   font-style: italic; }

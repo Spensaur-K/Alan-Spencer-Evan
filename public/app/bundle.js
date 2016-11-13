@@ -10372,7 +10372,7 @@
 	    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
 	    + "</div>\r\n<div>password: "
 	    + alias4(((helper = (helper = helpers.password || (depth0 != null ? depth0.password : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"password","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
+	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
 	},"useData":true});
 
 /***/ },
@@ -11606,10 +11606,15 @@
 
 	var _sockets = __webpack_require__(27);
 
+	var _loading = __webpack_require__(34);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function create() {
 	        _sockets.socket.on("jobcreate", function (jid) {
+	                _loading2.default.off();
 	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " created successfully</div>");
 	        });
 	        _sockets.socket.on("pickup", function (jid) {
@@ -11620,7 +11625,7 @@
 	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
-
+	                _loading2.default.on();
 	                if (navigator.geolocation) {
 	                        navigator.geolocation.getCurrentPosition(function (position) {
 	                                var lat = position.coords.latitude;
@@ -11693,10 +11698,15 @@
 
 	var _navigate = __webpack_require__(1);
 
+	var _loading = __webpack_require__(34);
+
+	var _loading2 = _interopRequireDefault(_loading);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function create() {
 	        _sockets.socket.on("login", function (auth) {
+	                _loading2.default.off();
 	                if (auth.status === "success") {
 	                        (0, _navigate.navigate)("home", auth);
 	                } else {
@@ -11704,6 +11714,7 @@
 	                }
 	        });
 	        (0, _jquery2.default)(".button.login").click(function (e) {
+	                _loading2.default.on();
 	                (0, _sockets.login)((0, _jquery2.default)("#username").val(), (0, _jquery2.default)("#password").val());
 	        });
 	};
@@ -11739,6 +11750,34 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+
+	var _jquery = __webpack_require__(2);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	        off: function off() {
+	                (0, _jquery2.default)("#loading").css("display", "none");
+	        },
+	        on: function on() {
+	                (0, _jquery2.default)("#loading").css("display", "block");
+	        }
+	};
 
 /***/ }
 /******/ ]);
