@@ -18,18 +18,6 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', function () {
     console.log("Worked!");
-    var testUser = new User({
-        username: 'spencer2',
-        password: 'password1',
-        id: '12345',
-        name: 'Spencer'
-    });
-    User.findOne({username: testUser.username}).then(function(user) {
-        if (!user)
-            testUser.save().catch(function(err) { throw err; });
-        else
-            console.log(testUser.username + ' already existed in db');
-    });
 });
 
 var server = http.createServer(app).listen(process.env.PORT);
@@ -40,7 +28,7 @@ var webhooks = require("./requests/webhooks");
 const field = require("./requests/customFields");
 var items = require("./items.json");
 const psuedobool = require("./requests/psuedobool");
-
+const clients = require("./requests/clients");
 const socketToJobs = new WeakMap();
 
 app.use("/webhooks", webhooks);
@@ -55,7 +43,34 @@ io.on("connection", function (socket) {
     };
     socketToJobs.set(socket, jobStorage);
 
-    socket.on("login", function (message) {
+    socket.on("signup", req => {
+        clients.createCustomer(req)
+        .then(client => {
+            const newUser = new User({
+                username: req.username,
+                password: req.password,
+                id: client.id,
+                first_name: req.first,
+                last_name: req.last
+            });
+            User.findOne({username: newUser.username}).then(function(user) {
+                if (!user)
+                    newUser.save()
+                    .then(()=>{
+                        loggin(req);
+                        req.status = "success";
+                        socket.emit("signup", req);
+                    })
+                    .catch(function(err) {  });
+                else
+                    socket.emit({status:"username already taken"})
+            });
+        });
+    })
+
+    socket.on("login", loggin);
+
+    function loggin(message) {
         User.findOne({username: message.username}).then(function (user) {
             if (user && user.verifyPassword(message.password)) {
                 console.log("Auth success");
@@ -99,7 +114,7 @@ io.on("connection", function (socket) {
                 socket.emit("login", {status: 'You need to be spencer and have password password1'});
             }
         });
-    });
+    }
 });
 
 console.log("Starting Socket App - http://localhost:" + process.env.PORT);

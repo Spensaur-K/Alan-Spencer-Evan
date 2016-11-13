@@ -20,6 +20,24 @@ export function create() {
                         $("#password").val()
                 );
         });
+
+        socket.on("signup", auth => {
+                loading.off();
+                if (auth.status === "success") {
+                        navigate("home", auth);
+                } else {
+                        navigate("login", auth);
+                }
+        });
+        $(".button.signup").click(e => {
+                loading.on();
+                socket.emit("signup", {
+                        username: $("#username").val(),
+                        password: $("#password").val(),
+                        first: $("#first_name").val(),
+                        last: $("#last_name").val()
+                });
+        });
 };
 
 export function destroy() {
