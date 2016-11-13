@@ -10370,7 +10370,7 @@
 
 	  return "<div>username: "
 	    + container.escapeExpression(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"username","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Dark Roast\">Dark Roast</option>\r\n                        <option value=\"Mild Roast\">Mild Roast</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class=\"spacing\"></div>\r\n<div class=\"row\">\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves.png\">\r\n        </div>\r\n        <div class=\"col-6 col-m-4 col-p-4\">\r\n                <div class=\"buy button\">\r\n                        <img src=\"/assets/coffeeCup.png\" class=\"cup\">\r\n                </div>\r\n                <div class=\"creme-control\">\r\n                        <div id=\"creme-display\"></div>\r\n                        <input id=\"creme\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves2.png\">\r\n        </div>\r\n\r\n        <div class=\"feedback\">\r\n\r\n        </div>";
+	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Dark Roast\">Dark Roast</option>\r\n                        <option value=\"Mild Roast\">Mild Roast</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class=\"spacing\"></div>\r\n<div class=\"row\">\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves.png\">\r\n        </div>\r\n        <div class=\"col-6 col-m-4 col-p-4\">\r\n                <div class=\"buy button\">\r\n                        <img src=\"/assets/coffeeCup.png\" class=\"cup\">\r\n                </div>\r\n                <div class=\"creme-control\">\r\n                        <div id=\"creme-display\"></div>\r\n                        <input id=\"creme\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n                <div class=\"sugar-control\">\r\n                        <div id=\"sugar-display\"></div>\r\n                        <input id=\"sugar\" type=\"range\" orient=\"vertical\" />\r\n                </div>\r\n        </div>\r\n\r\n        <div class=\"col-3 col-m-4 col-p-4\">\r\n                <img src=\"/assets/leaves2.png\">\r\n        </div>\r\n\r\n        <div class=\"feedback\">\r\n\r\n        </div>";
 	},"useData":true});
 
 /***/ },
@@ -11628,7 +11628,7 @@
 
 	function create() {
 	        (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
-	        (0, _jquery2.default)("#creme").change(function (e) {
+	        (0, _jquery2.default)("#creme").on("input", function (e) {
 	                (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
 	        });
 	        _sockets.socket.on("jobcreate", function (jid) {
@@ -11651,7 +11651,7 @@
 	                                        var long = position.coords.longitude;
 
 	                                        (0, _sockets.order)({
-	                                                type: (0, _jquery2.default)("#coffee").val(),
+	                                                type: (0, _jquery2.default)("#coffee").val() + " coffee with " + (0, _jquery2.default)("#creme").val() / 100 * 7 + " creme",
 	                                                from: (0, _jquery2.default)("#shop").val(),
 	                                                lat: lat,
 	                                                long: long
