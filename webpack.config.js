@@ -37,6 +37,10 @@ module.exports = {
         loader: 'html'
       },
       {
+        test: /\.hbs$/,
+        loader: 'handlebars'
+      },
+      {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       },
