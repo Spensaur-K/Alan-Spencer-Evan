@@ -1,7 +1,7 @@
 var request = require('request-promise-native');
 var dotenv = require("dotenv").load();
 
-var accesstoken = process.env.JOBBER_ACCESS_KEY;
+var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
 var googlekey = process.env.GOOGLE_API_KEY;
 
 module.exports.createProperty = function(coords) {
@@ -20,6 +20,8 @@ module.exports.createProperty = function(coords) {
             city: city,
             province: province,
             pc: pc,
+            latitude: coords.lat,
+            longitude: coords.long,
             client: 10883960
         }};
         request({
@@ -32,6 +34,9 @@ module.exports.createProperty = function(coords) {
                 'X-API-ACCESS-TOKEN': accesstoken
             },
             body: JSON.stringify(property)
-        })
+        }).then(function(response) {
+            console.log(response);
+            return response;
+        });
     });
 };
