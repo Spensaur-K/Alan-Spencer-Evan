@@ -39,6 +39,20 @@ img {
         width: 125px;
 }
 
+.sugar-control {
+        position: fixed;
+        right: 180px;
+        top: 100px;
+}
+
+#sugar-display {
+        background-image: url("/assets/sugar.jpg");
+        background-repeat: repeat-y;
+        display: inline-block;
+        height: 700px;
+        width: 125px;
+}
+
 input[type=range][orient=vertical]
 {
     writing-mode: bt-lr; /* IE */

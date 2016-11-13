@@ -4,7 +4,7 @@ import loading from "./../loading";
 
 export function create() {
         $("#creme-display").height(($("#creme").val()/100)*900);
-        $("#creme").change(e => {
+        $("#creme").on("input", e => {
                 $("#creme-display").height(($("#creme").val()/100)*900)
         });
         socket.on("jobcreate", (jid) => {
@@ -27,7 +27,7 @@ export function create() {
                                         var long = position.coords.longitude;
 
                                         order({
-                                                type: $("#coffee").val(),
+                                                type: `${$("#coffee").val()} coffee with ${($("#creme").val()/100)*7} creme`,
                                                 from: $("#shop").val(),
                                                 lat: lat,
                                                 long: long
