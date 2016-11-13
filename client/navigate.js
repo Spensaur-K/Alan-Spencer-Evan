@@ -7,5 +7,5 @@ const viewLoader = require.context("./views"),
 export function navigate(path, ctx = {}) {
 	const file = `./${path}`;
 	pageElement.html(viewLoader(file), ctx);
-	controllerLoader(file)(ctx);
+	controllerLoader(file).create(ctx);
 }

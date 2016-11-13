@@ -107,7 +107,7 @@
 
 		var file = "./" + path;
 		pageElement.html(viewLoader(file), ctx);
-		controllerLoader(file)(ctx);
+		controllerLoader(file).create(ctx);
 	}
 
 /***/ },
@@ -10408,10 +10408,10 @@
 
 	function create() {
 	        _sockets.socket.on("jobcreate", function (jid) {
-	                (0, _jquery2.default)(".feedback").append("Job with id " + jid + " created successfully");
+	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " created successfully</div>");
 	        });
 	        _sockets.socket.on("pickup", function (jid) {
-	                (0, _jquery2.default)(".feedback").append("Job with id " + jid + " was just picked up");
+	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " was just picked up</div>");
 	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {

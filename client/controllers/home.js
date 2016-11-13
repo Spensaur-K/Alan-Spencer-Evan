@@ -3,10 +3,10 @@ import { order, socket } from "./../sockets";
 
 export function create() {
         socket.on("jobcreate", (jid) => {
-                $(".feedback").append(`Job with id ${jid} created successfully`);
+                $(".feedback").append(`<div>Job with id ${jid} created successfully</div>`);
         })
         socket.on("pickup", jid => {
-                $(".feedback").append(`Job with id ${jid} was just picked up`);
+                $(".feedback").append(`<div>Job with id ${jid} was just picked up</div>`);
         });
         //clc location
         $(".buy.button").click(e => {

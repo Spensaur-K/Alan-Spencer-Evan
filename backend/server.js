@@ -53,7 +53,7 @@ io.on("connection", function(socket) {
             for (const job of jobsResponse.jobs) {
                 if (jobStorage.awaitingPickup.has(job.id)) {
                     const pickedUp = field("Picked Up", job.custom_field_values);
-                    if (pickedUp == "true") {
+                    if (pickedUp == "true" || (typeof pickedUp === "boolean" && pickedUp)) {
                         jobStorage.awaitingPickup.delete(job.id)
                         jobStorage.awaitingDelivery.add(job.id)
                         socket.emit("pickup", job.id);
