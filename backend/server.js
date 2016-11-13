@@ -16,7 +16,7 @@ var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
 const field = require("./requests/customFields");
 var items = require("./items.json");
-
+const psuedobool = require("./requests/psuedobool");
 
 const socketToJobs = new WeakMap();
 
@@ -48,15 +48,20 @@ io.on("connection", function(socket) {
     });
 
     webhooks.hookEvents.on("job_change", () => {
-        // TODO slow af, get actual data from hook
+        // TODO slow af, get actual data from hook's post req
         jobs.getJobs().then((jobsResponse) => {
             for (const job of jobsResponse.jobs) {
                 if (jobStorage.awaitingPickup.has(job.id)) {
                     const pickedUp = field("Picked Up", job.custom_field_values);
-                    if (pickedUp == "true" || (typeof pickedUp === "boolean" && pickedUp)) {
+                    if (psuedobool(pickedUp)) {
                         jobStorage.awaitingPickup.delete(job.id)
                         jobStorage.awaitingDelivery.add(job.id)
                         socket.emit("pickup", job.id);
+                    }
+                } else if (jobStorage.awaitingDelivery.has(job.id)) {
+                    if (psuedobool(job.closed)) {
+                        jobStorage.awaitingDelivery.delete(job.id)
+                        socket.emit("delivery", job.id);
                     }
                 }
             }

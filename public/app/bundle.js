@@ -10413,6 +10413,9 @@
 	        _sockets.socket.on("pickup", function (jid) {
 	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " was just picked up</div>");
 	        });
+	        _sockets.socket.on("delivery", function (jid) {
+	                (0, _jquery2.default)(".feedback").append("<div>Job with id " + jid + " was just delivered to you, look up from your phone</div>");
+	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
 

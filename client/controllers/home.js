@@ -8,6 +8,9 @@ export function create() {
         socket.on("pickup", jid => {
                 $(".feedback").append(`<div>Job with id ${jid} was just picked up</div>`);
         });
+        socket.on("delivery", jid => {
+                $(".feedback").append(`<div>Job with id ${jid} was just delivered to you, look up from your phone</div>`);
+        });
         //clc location
         $(".buy.button").click(e => {
 
