@@ -7,8 +7,13 @@ var server = http.createServer(app).listen(process.env.PORT);
 var io = require("socket.io")(server);
 var path = require("path");
 var coffee = require("./requests/coffees");
+var webhooks = require("./requests/webhooks");
+
+
+app.use("/webhooks", webhooks);
 
 app.use(express.static(path.join(__dirname, "../public")));
+
 
 io.on("connection", function(socket) {
 
