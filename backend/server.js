@@ -8,6 +8,12 @@ var io = require("socket.io")(server);
 var path = require("path");
 var coffee = require("./requests/coffees");
 var webhooks = require("./requests/webhooks");
+try {
+    var dotenv = require("dotenv").load();
+} catch(error) {
+    // just for Spencer
+}
+
 
 
 app.use("/webhooks", webhooks);
