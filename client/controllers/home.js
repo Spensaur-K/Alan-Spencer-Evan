@@ -34,7 +34,9 @@ export function create() {
                                         var long = position.coords.longitude;
 
                                         order({
-                                                type: `${$("#coffee").val()} coffee with ${($("#creme").val()/100)*7} creme and ${($("#sugar").val()/100)*7} sugar`,
+                                                coffee_d: $("#coffee").val(),
+                                                cream_q: ($("#creme").val()/100)*7,
+                                                sugar_q:  ($("#sugar").val()/100)*7,
                                                 from: $("#shop").val(),
                                                 lat: lat,
                                                 long: long
