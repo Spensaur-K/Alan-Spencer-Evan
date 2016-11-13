@@ -25,12 +25,24 @@ module.exports.createJob = function(req) {
             },
             body: JSON.stringify(task)
         }).then(function (response) {
-            console.log('Status:', response.statusCode);
-            console.log('Headers:', JSON.stringify(response.headers));
-            console.log('Response:', response.body);
-            console.log(response);
-            return response;
+            return JSON.parse(response);
         });
 
     });
 };
+
+exports.getJobs = function(){
+    return request({
+            method: 'GET',
+            url: 'https://api.getjobber.com/api/jobs',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-API-VERSION': '2.2.0',
+                'X-API-SIDE-LOADING': 'true',
+                'X-API-ACCESS-TOKEN': accesstoken
+            },
+            body: JSON.stringify(task)
+        }).then(function (response) {
+            return JSON.parse(response);
+        });
+}
