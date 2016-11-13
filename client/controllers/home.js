@@ -13,8 +13,8 @@ module.exports = () => {
                                 var long = position.coords.longitude;
 
                                 order({
-                                        type: "coffee",
-                                        from: "somehwere (timmies)",
+                                        type: $("#coffee").val(),
+                                        from: $("#shop").val(),
                                         lat: lat,
                                         long: long
                                 });

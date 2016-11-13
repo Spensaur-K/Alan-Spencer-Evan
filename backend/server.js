@@ -15,6 +15,7 @@ var path = require("path");
 var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
 const field = require("./requests/customFields");
+var items = require("./items.json");
 
 
 const socketToJobs = new WeakMap();
