@@ -25,7 +25,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 
 io.on("connection", function(socket) {
-    socketToJobs.set(socket, new Set);
+    const jobs = new Set;
+    socketToJobs.set(socket, jobs);
 
     socket.on("chat", function(message) {
     	socket.broadcast.emit("message", message);
@@ -35,8 +36,8 @@ io.on("connection", function(socket) {
 
         console.log(order);
         jobs.createJob(order)
-        .then((res) => {
-            debugger;
+        .then(({ job }) => {
+            jobs.add(job.id);
         });
         //socket.broadcast.emit("order", number);
     });

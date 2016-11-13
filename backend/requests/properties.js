@@ -30,7 +30,7 @@ module.exports.createProperty = function(coords) {
         var address = bigAddr[1].short_name + ' ' + bigAddr[2].short_name;
         var city = bigAddr[4].short_name;
         var province = bigAddr[6].short_name;
-        var pc = bigAddr[8].short_name;
+        var pc = bigAddr[7].short_name;
         var property = { property: {
             street1: address,
             city: city,
@@ -52,7 +52,7 @@ module.exports.createProperty = function(coords) {
                 }
 
             }
-            request({
+            return request({
                 method: 'POST',
                 url: 'https://api.getjobber.com/api/properties',
                 headers: {
