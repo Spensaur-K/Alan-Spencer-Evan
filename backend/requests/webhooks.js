@@ -5,10 +5,15 @@ const webhooks = express.Router();
 
 webhooks.use(bodyParser.urlencoded());
 
-webhooks.post("/job_done", (req, res) => {
-        console.log(req.body);
-        console.log(JSON.parse(req.body));
-        res.end();
+webhooks.post("/job_done", (req, res, next) => {
+        req.headers["content-type"] = "application/json";
+        next();
+});
+
+webhooks.use(bodyParser.json());
+
+webhooks.post("/job_done", (req, res, next) => {
+        req;
 });
 
 module.exports = webhooks;
