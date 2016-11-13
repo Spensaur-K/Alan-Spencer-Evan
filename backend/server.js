@@ -25,7 +25,6 @@ app.use("/webhooks", webhooks);
 app.use(express.static(path.join(__dirname, "../public")));
 
 
-
 io.on("connection", function(socket) {
     const jobStorage = {
         awaitingPickup: new Set,
@@ -33,19 +32,21 @@ io.on("connection", function(socket) {
     };
     socketToJobs.set(socket, jobStorage);
 
-    socket.on("chat", function(message) {
-    	socket.broadcast.emit("message", message);
-    });
+    socket.on("login", function(message) {
+        if (message.username == 'spencer' && message.password == 'password1') {
+            socket.on("chat", function(message) {
+                socket.broadcast.emit("message", message);
+            });
 
-    socket.on("order", function(order) {
+            socket.on("order", function(order) {
 
-        console.log(order);
-        jobs.createJob(order)
-        .then(({ job }) => {
-            jobStorage.awaitingPickup.add(job.id);
-            socket.emit("jobcreate", job.id);
-        });
-    });
+                console.log(order);
+                jobs.createJob(order)
+                    .then(({ job }) => {
+                        jobStorage.awaitingPickup.add(job.id);
+                        socket.emit("jobcreate", job.id);
+                    });
+            });
 
     webhooks.hookEvents.on("job_change", () => {
         // TODO slow af, get actual data from hook's post req
@@ -65,9 +66,12 @@ io.on("connection", function(socket) {
                     }
                 }
             }
-        });
+        })});
+            socket.emit("login", {status: 'success', username: 'spencer'});
+        } else {
+            socket.emit("login", {status: 'You need to be spencer and have password password1'});
+        }
     });
-
 });
 
 console.log("Starting Socket App - http://localhost:" + process.env.PORT);
