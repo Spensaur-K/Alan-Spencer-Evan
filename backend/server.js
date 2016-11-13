@@ -14,6 +14,7 @@ var io = require("socket.io")(server);
 var path = require("path");
 var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
+var items = require("./items.json");
 
 
 const socketToJobs = new WeakMap();
