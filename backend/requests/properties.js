@@ -46,12 +46,13 @@ module.exports.createProperty = function(coords, clientId) {
             longitude: coords.long,
             client: clientId || 10884309
         }};
-        console.log(property);
+        console.log('Creating this:')
+        console.log(JSON.stringify(property));
         return getProperties().then(function(response) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
-                if (prop.street1 === property.property.street1 && prop.city === property.property.city && prop.client.id === property.property.client) {
+                if (prop.street1 === property.property.street1 && prop.city === property.property.city && prop.client.id == property.property.client) {
                     console.log("Already exists");
                     console.log(prop);
                     return prop;
@@ -69,8 +70,9 @@ module.exports.createProperty = function(coords, clientId) {
                 },
                 body: JSON.stringify(property)
             }).then(function(response) {
-                console.log(response.property);
-                return response.property;
+                console.log('API returned this');
+                console.log(JSON.parse(response).property);
+                return JSON.parse(response).property;
             });
         });
 
