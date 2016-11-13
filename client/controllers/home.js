@@ -15,8 +15,8 @@ module.exports = () => {
                                 order({
                                         type: "coffee",
                                         from: "somehwere (timmies)",
-                                        latitude: lat,
-                                        longitude: long
+                                        lat: lat,
+                                        long: long
                                 });
 
                         });
@@ -27,9 +27,9 @@ module.exports = () => {
                         order({
                                 type: "coffee",
                                 from: "somehwere (timmies)",
-                                latitude: lat,
-                                longitude: long
-                                });
+                                lat: lat,
+                                long: long
+                        });
 
                 }  
 

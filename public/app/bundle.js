@@ -10362,7 +10362,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"home-page\">\n        <h1>Press to order Coffee</h1>\n        <button>\n                <div class=\"buy button\"></div>\n        </button>\n        <div class=\"feedback\">\n                \n        </div>\n</div>";
+	module.exports = "<div class=\"home-page\">\r\n        <h1>Press to order Coffee</h1>\r\n        <button>\r\n                <div class=\"buy button\"></div>\r\n        </button>\r\n        <div class=\"feedback\">\r\n                \r\n        </div>\r\n</div>";
 
 /***/ },
 /* 5 */
@@ -10404,10 +10404,30 @@
 
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
-	                (0, _sockets.order)({
-	                        type: "coffee",
-	                        from: "somehwere (timmies)"
-	                });
+
+	                if (navigator.geolocation) {
+	                        navigator.geolocation.getCurrentPosition(function (position) {
+	                                var lat = position.coords.latitude;
+	                                var long = position.coords.longitude;
+
+	                                (0, _sockets.order)({
+	                                        type: "coffee",
+	                                        from: "somehwere (timmies)",
+	                                        lat: lat,
+	                                        long: long
+	                                });
+	                        });
+	                } else {
+	                        // "Geolocation is not supported by this browser.";
+	                        var lat = 0;
+	                        var long = 0;
+	                        (0, _sockets.order)({
+	                                type: "coffee",
+	                                from: "somehwere (timmies)",
+	                                lat: lat,
+	                                long: long
+	                        });
+	                }
 	        });
 	};
 
