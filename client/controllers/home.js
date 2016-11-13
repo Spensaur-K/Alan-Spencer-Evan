@@ -3,6 +3,9 @@ import { order, socket } from "./../sockets";
 import loading from "./../loading";
 
 export function create() {
+        $("#creme").val(100/7)
+        $("#sugar").val(100/7)
+
         $("#creme-display").height(($("#creme").val()/100)*900);
         $("#creme").on("input", e => {
                 $("#creme-display").height(($("#creme").val()/100)*900)

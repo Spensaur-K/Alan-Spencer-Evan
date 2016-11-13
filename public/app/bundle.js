@@ -11627,6 +11627,9 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function create() {
+	        (0, _jquery2.default)("#creme").val(100 / 7);
+	        (0, _jquery2.default)("#sugar").val(100 / 7);
+
 	        (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
 	        (0, _jquery2.default)("#creme").on("input", function (e) {
 	                (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
