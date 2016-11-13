@@ -6,7 +6,7 @@ process.env.PORT = process.env.PORT || 3000;
 var server = http.createServer(app).listen(process.env.PORT);
 var io = require("socket.io")(server);
 var path = require("path");
-var coffee = require("./requests/coffees");
+var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
 try {
     var dotenv = require("dotenv").load();
@@ -30,7 +30,7 @@ io.on("connection", function(socket) {
     socket.on("order", function(order) {
 
         console.log(order);
-        coffee.createTask(order);
+        jobs.createJob(order);
         //socket.broadcast.emit("order", number);
     });
 	//socket.emit("message", "Welcome to Cyber Chat");
