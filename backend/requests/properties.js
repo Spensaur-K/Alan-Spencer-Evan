@@ -44,15 +44,14 @@ module.exports.createProperty = function(coords, clientId) {
             country: address.country,
             latitude: coords.lat,
             longitude: coords.long,
-            client: clientId
+            client: clientId || 10884309
         }};
         console.log(property);
         return getProperties().then(function(response) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
-                if (prop.street1 === property.property.street1 && prop.city === property.property.city
-                && prop.client == property.client) {
+                if (prop.street1 === property.property.street1 && prop.city === property.property.city) {
                     console.log("Already exists");
                     console.log(prop);
                     return prop;

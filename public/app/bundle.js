@@ -100,6 +100,9 @@
 		currentView = path;
 	}
 
+	window.n = navigate;
+	window.j = _jquery2.default;
+
 	function refresh(path) {
 		var ctx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
