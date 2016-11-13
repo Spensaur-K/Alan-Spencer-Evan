@@ -4,6 +4,20 @@ var dotenv = require("dotenv").load();
 var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
 var googlekey = process.env.GOOGLE_API_KEY;
 
+getProperties = function() {
+    return request({
+        method: 'GET',
+        url: 'https://api.getjobber.com/api/properties',
+        headers: {
+            'X-API-VERSION': '2.2.0',
+            'X-API-SIDE-LOADING': 'true',
+            'X-API-ACCESS-TOKEN': accesstoken
+        }
+    }).then(function(response) {
+        return response;
+    });
+};
+
 module.exports.createProperty = function(coords) {
     request({
         method: 'GET',
@@ -24,19 +38,35 @@ module.exports.createProperty = function(coords) {
             longitude: coords.long,
             client: 10883960
         }};
-        request({
-            method: 'POST',
-            url: 'https://api.getjobber.com/api/properties',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-API-VERSION': '2.2.0',
-                'X-API-SIDE-LOADING': 'true',
-                'X-API-ACCESS-TOKEN': accesstoken
-            },
-            body: JSON.stringify(property)
-        }).then(function(response) {
-            console.log(response);
-            return response;
+
+        getProperties().then(function(response) {
+            return JSON.parse(response).properties;
+        }).then(function(properties) {
+            for (var prop of properties) {
+                if (prop.street1 === address && prop.city === city) {
+                    console.log("Already exists");
+                    console.log(prop);
+                    return prop;
+                }
+
+            }
+            request({
+                method: 'POST',
+                url: 'https://api.getjobber.com/api/properties',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-API-VERSION': '2.2.0',
+                    'X-API-SIDE-LOADING': 'true',
+                    'X-API-ACCESS-TOKEN': accesstoken
+                },
+                body: JSON.stringify(property)
+            }).then(function(response) {
+                console.log(response.property);
+                return response.property;
+            });
         });
+
     });
 };
+
+module.exports.createProperty({lat: 53.545881, long: -113.499053});
