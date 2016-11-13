@@ -1,8 +1,8 @@
 {
   "items": [
-    {"type": "Barely Coffee", "cost": 5.00},
     {"type": "Dark Roast", "cost": 10.00},
-    {"type": "Light Roast", "cost": 30.00}
+    {"type": "Light Roast", "cost": 30.00},
+    {"type": "Barely Coffee", "cost": 5.00}
     ],
 
   "shops": [

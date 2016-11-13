@@ -10346,16 +10346,16 @@
 	module.exports = {
 		"items": [
 			{
-				"type": "Barely Coffee",
-				"cost": 5
-			},
-			{
 				"type": "Dark Roast",
 				"cost": 10
 			},
 			{
 				"type": "Light Roast",
 				"cost": 30
+			},
+			{
+				"type": "Barely Coffee",
+				"cost": 5
 			}
 		],
 		"shops": [
@@ -11714,7 +11714,9 @@
 	                                        var long = position.coords.longitude;
 
 	                                        (0, _sockets.order)({
-	                                                type: (0, _jquery2.default)("#coffee").val() + " coffee with " + (0, _jquery2.default)("#creme").val() / 100 * 7 + " creme and " + (0, _jquery2.default)("#sugar").val() / 100 * 7 + " sugar",
+	                                                coffee_d: (0, _jquery2.default)("#coffee").val(),
+	                                                cream_q: (0, _jquery2.default)("#creme").val() / 100 * 7,
+	                                                sugar_q: (0, _jquery2.default)("#sugar").val() / 100 * 7,
 	                                                from: (0, _jquery2.default)("#shop").val(),
 	                                                lat: lat,
 	                                                long: long
