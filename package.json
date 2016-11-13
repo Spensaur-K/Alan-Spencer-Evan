@@ -4,6 +4,7 @@
   "main": "backend/server.js",
   "description": "Template for projects",
   "scripts": {
+    "start": "node backend/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Spencer Killen & Alan Yong",
