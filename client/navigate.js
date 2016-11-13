@@ -20,6 +20,10 @@ export function navigate(path, ctx = {}) {
 	currentView = path;
 }
 
+
+window.n = navigate;
+window.j = $;
+
 export function refresh(path, ctx = {}) {
 	navigate(path, ctx);
 }
