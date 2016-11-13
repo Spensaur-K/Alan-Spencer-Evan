@@ -1,8 +1,10 @@
 import $ from "jquery";
 import { order, socket } from "./../sockets";
+import loading from "./../loading";
 
 export function create() {
         socket.on("jobcreate", (jid) => {
+                loading.off();
                 $(".feedback").append(`<div>Job with id ${jid} created successfully</div>`);
         })
         socket.on("pickup", jid => {
@@ -13,10 +15,9 @@ export function create() {
         });
         //clc location
         $(".buy.button").click(e => {
-
-
-               if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position){
+                loading.on();
+                if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(function (position) {
                                 var lat = position.coords.latitude;
                                 var long = position.coords.longitude;
 
@@ -39,7 +40,7 @@ export function create() {
                                 long: long
                         });
 
-                }  
+                }
 
         });
 };
