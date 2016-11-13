@@ -10366,12 +10366,10 @@
 	var Handlebars = __webpack_require__(5);
 	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+	    var helper;
 
 	  return "<div>username: "
-	    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n<div>password: "
-	    + alias4(((helper = (helper = helpers.password || (depth0 != null ? depth0.password : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"password","hash":{},"data":data}) : helper)))
+	    + container.escapeExpression(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"username","hash":{},"data":data}) : helper)))
 	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press cup to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
 	},"useData":true});
 
@@ -11625,29 +11623,31 @@
 	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
-	                _loading2.default.on();
-	                if (navigator.geolocation) {
-	                        navigator.geolocation.getCurrentPosition(function (position) {
-	                                var lat = position.coords.latitude;
-	                                var long = position.coords.longitude;
+	                if (confirm("Confirm Order?")) {
+	                        _loading2.default.on();
+	                        if (navigator.geolocation) {
+	                                navigator.geolocation.getCurrentPosition(function (position) {
+	                                        var lat = position.coords.latitude;
+	                                        var long = position.coords.longitude;
 
+	                                        (0, _sockets.order)({
+	                                                type: (0, _jquery2.default)("#coffee").val(),
+	                                                from: (0, _jquery2.default)("#shop").val(),
+	                                                lat: lat,
+	                                                long: long
+	                                        });
+	                                });
+	                        } else {
+	                                // "Geolocation is not supported by this browser.";
+	                                var lat = 0;
+	                                var long = 0;
 	                                (0, _sockets.order)({
-	                                        type: (0, _jquery2.default)("#coffee").val(),
-	                                        from: (0, _jquery2.default)("#shop").val(),
+	                                        type: "coffee",
+	                                        from: "somehwere (timmies)",
 	                                        lat: lat,
 	                                        long: long
 	                                });
-	                        });
-	                } else {
-	                        // "Geolocation is not supported by this browser.";
-	                        var lat = 0;
-	                        var long = 0;
-	                        (0, _sockets.order)({
-	                                type: "coffee",
-	                                from: "somehwere (timmies)",
-	                                lat: lat,
-	                                long: long
-	                        });
+	                        }
 	                }
 	        });
 	};
