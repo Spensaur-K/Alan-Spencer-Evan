@@ -1,15 +1,14 @@
 const express = require("express");
-const body = require("body-parser");
+const bodyParser = require("body-parser");
 
 const webhooks = express.Router();
 
-webhooks.use(body.text());
+webhooks.use(bodyParser.urlencoded());
 
-webhooks.post("/job_done", (req, res) => {
-        //console.log(req);
-        console.log(req.body);
-        //res.send(req.body);
-        res.end();
+webhooks.use(bodyParser.raw());
+
+webhooks.post("/job_change", (req, res, next) => {
+        
 });
 
 module.exports = webhooks;
