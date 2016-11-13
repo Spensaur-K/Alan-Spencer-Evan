@@ -45,7 +45,7 @@ io.on("connection", function (socket) {
 
     socket.on("signup", req => {
         clients.createCustomer(req)
-        .then(client => {
+        .then(({ client }) => {
             const newUser = new User({
                 username: req.username,
                 password: req.password,
@@ -72,6 +72,7 @@ io.on("connection", function (socket) {
 
     function loggin(message) {
         User.findOne({username: message.username}).then(function (user) {
+            socket.cid = user.id;
             if (user && user.verifyPassword(message.password)) {
                 console.log("Auth success");
                 socket.on("chat", function (message) {
