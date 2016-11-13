@@ -25,8 +25,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 
 io.on("connection", function(socket) {
-    const jobs = new Set;
-    socketToJobs.set(socket, jobs);
+    const jobStorage = new Set;
+    socketToJobs.set(socket, jobStorage);
 
     socket.on("chat", function(message) {
     	socket.broadcast.emit("message", message);
@@ -37,16 +37,15 @@ io.on("connection", function(socket) {
         console.log(order);
         jobs.createJob(order)
         .then(({ job }) => {
-            jobs.add(job.id);
+            jobStorage.add(job.id);
         });
         //socket.broadcast.emit("order", number);
     });
-	//socket.emit("message", "Welcome to Cyber Chat");
 
-
-
-
-
+    webhooks.hookEvents.on("job_change", () => {
+        // TODO slow af, get actual data from hook
+        debugger;
+    });
 
 });
 
