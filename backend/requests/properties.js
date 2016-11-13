@@ -20,32 +20,38 @@ getProperties = function() {
     });
 };
 
+parseAddressComponents = function(response) {
+    var components = {};
+    console.log(response.length);
+    for (var i = 0; i < response.length; i++) {
+        components[response[i].types[0]] = response[i].short_name;
+    }
+    return components;
+};
+
 module.exports.createProperty = function(coords) {
     return request({
         method: 'GET',
         url: 'https://maps.googleapis.com/maps/api/geocode/json',
         qs: {latlng: coords.lat + ',' + coords.long, key: googlekey}
     }).then(function(response) {
-        var bigAddr = JSON.parse(response).results[0].address_components;
-        var address = bigAddr[1].short_name + ' ' + bigAddr[2].short_name;
-        var city = bigAddr[4].short_name;
-        var province = bigAddr[6].short_name;
-        var pc = bigAddr[7].short_name;
+        var address = parseAddressComponents(JSON.parse(response).results[0].address_components);
         var property = { property: {
-            street1: address,
-            city: city,
-            province: province,
-            pc: pc,
+            street1: address.street_number + ' ' + address.route,
+            city: address.locality,
+            province: address.administrative_area_level_1,
+            pc: address.postal_code,
+            country: address.country,
             latitude: coords.lat,
             longitude: coords.long,
             client: 10883960
         }};
-
+        console.log(property);
         return getProperties().then(function(response) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
-                if (prop.street1 === address && prop.city === city) {
+                if (prop.street1 === property.property.street1 && prop.city === property.property.city) {
                     console.log("Already exists");
                     console.log(prop);
                     return prop;
