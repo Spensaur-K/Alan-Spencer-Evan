@@ -7,7 +7,7 @@ webhooks.use(bodyParser.urlencoded());
 
 webhooks.post("/job_done", (req, res) => {
         console.log(req.rawHeaders);
-        body;
+        console.log(req.body);
         res.end();
 });
 
