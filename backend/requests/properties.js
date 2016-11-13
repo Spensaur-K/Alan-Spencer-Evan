@@ -29,7 +29,7 @@ parseAddressComponents = function(response) {
     return components;
 };
 
-module.exports.createProperty = function(coords) {
+module.exports.createProperty = function(coords, clientId) {
     return request({
         method: 'GET',
         url: 'https://maps.googleapis.com/maps/api/geocode/json',
@@ -44,14 +44,15 @@ module.exports.createProperty = function(coords) {
             country: address.country,
             latitude: coords.lat,
             longitude: coords.long,
-            client: 10883960
+            client: clientId
         }};
         console.log(property);
         return getProperties().then(function(response) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
-                if (prop.street1 === property.property.street1 && prop.city === property.property.city) {
+                if (prop.street1 === property.property.street1 && prop.city === property.property.city
+                && prop.client == property.client) {
                     console.log("Already exists");
                     console.log(prop);
                     return prop;
