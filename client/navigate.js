@@ -1,5 +1,5 @@
 import $ from "jquery";
-import all from "./../items.json";
+import all from "./items.json";
 
 const viewLoader = require.context("./views"),
 	  controllerLoader = require.context("./controllers"),

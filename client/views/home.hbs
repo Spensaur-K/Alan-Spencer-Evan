@@ -3,15 +3,15 @@
         <h1>Press cup to order</h1>
         <div class="sel">
                 <select id="coffee">
-                        {#each items}
-                                <option value="{{this.name}}">{{this.name}}</option>
-                        {/each}
+                        {{#each items}}
+                                <option value="{{this.type}}">{{this.type}}</option>
+                        {{/each}}
                 </select>
                 <p>from</p>
                 <select id="shop">
-                        {#each shop}
+                        {{#each shops}}
                                 <option value="{{this.name}}">{{this.name}}</option>
-                        {/each}
+                        {{/each}}
                 </select>
         </div>
 </div>
