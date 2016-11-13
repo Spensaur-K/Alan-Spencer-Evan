@@ -44,7 +44,9 @@ io.on("connection", function(socket) {
 
     webhooks.hookEvents.on("job_change", () => {
         // TODO slow af, get actual data from hook
-        debugger;
+        jobs.getJobs().then(jobRes => {
+            debugger;
+        });
     });
 
 });
