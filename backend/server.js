@@ -35,9 +35,19 @@ io.on("connection", function(socket) {
     socket.on("order", function(order) {
 
         console.log(order);
+        /*
         jobs.createJob(order)
         .then(({ job }) => {
             jobStorage.add(job.id);
+        });
+*/
+
+        var request = require('request');
+        var url ='https://favourize.herokuapp.com/app/'
+        request(url, function (error, response, body) {
+        if (!error) {
+            console.log(body);
+        }
         });
         //socket.broadcast.emit("order", number);
     });
