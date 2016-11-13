@@ -1,8 +1,10 @@
 var request = require('request-promise-native');
-var dotenv = require("dotenv").load();
 
 var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
 var googlekey = process.env.GOOGLE_API_KEY;
+
+
+
 
 getProperties = function() {
     return request({
@@ -19,7 +21,7 @@ getProperties = function() {
 };
 
 module.exports.createProperty = function(coords) {
-    request({
+    return request({
         method: 'GET',
         url: 'https://maps.googleapis.com/maps/api/geocode/json',
         qs: {latlng: coords.lat + ',' + coords.long, key: googlekey}
@@ -39,7 +41,7 @@ module.exports.createProperty = function(coords) {
             client: 10883960
         }};
 
-        getProperties().then(function(response) {
+        return getProperties().then(function(response) {
             return JSON.parse(response).properties;
         }).then(function(properties) {
             for (var prop of properties) {
@@ -68,5 +70,3 @@ module.exports.createProperty = function(coords) {
 
     });
 };
-
-module.exports.createProperty({lat: 53.545881, long: -113.499053});
