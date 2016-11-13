@@ -1,8 +1,16 @@
 import $ from "jquery";
-import { order } from "./../sockets";
+import { order, socket } from "./../sockets";
 
-module.exports = () => {
-
+export function create() {
+        socket.on("jobcreate", (jid) => {
+                $(".feedback").append(`<div>Job with id ${jid} created successfully</div>`);
+        })
+        socket.on("pickup", jid => {
+                $(".feedback").append(`<div>Job with id ${jid} was just picked up</div>`);
+        });
+        socket.on("delivery", jid => {
+                $(".feedback").append(`<div>Job with id ${jid} was just delivered to you, look up from your phone</div>`);
+        });
         //clc location
         $(".buy.button").click(e => {
 
@@ -36,5 +44,9 @@ module.exports = () => {
         });
 };
 
+export function destroy() {
+        socket.off("pickup");
+        socket.off("jobcreate");
+}
 
 

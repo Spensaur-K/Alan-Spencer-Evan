@@ -1,5 +1,5 @@
-const socket = io.connect();
+export const socket = io.connect();
 
-exports.order = function(req) {
+export function order(req) {
         socket.emit("order", req);
 }
