@@ -70,6 +70,7 @@
 		value: true
 	});
 	exports.navigate = navigate;
+	exports.refresh = refresh;
 
 	var _jquery = __webpack_require__(2);
 
@@ -87,7 +88,7 @@
 		var ctx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 		var file = "./" + path;
-		var template = viewLoader(file);
+		var template = viewLoader(file + ".hbs");
 		if (typeof template === "function") {
 			template = template(ctx);
 		}
@@ -97,6 +98,12 @@
 		}
 		controllerLoader(file).create(ctx);
 		currentView = path;
+	}
+
+	function refresh(path) {
+		var ctx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		navigate(path, ctx);
 	}
 
 /***/ },
@@ -10333,7 +10340,7 @@
 		"./home": 4,
 		"./home.hbs": 4,
 		"./login": 24,
-		"./login.html": 24
+		"./login.hbs": 24
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -10358,11 +10365,11 @@
 	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
 	    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-	  return "<div class=\"home-page\">\r\n        <div>username: "
+	  return "<div>username: "
 	    + alias4(((helper = (helper = helpers.username || (depth0 != null ? depth0.username : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"username","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n        <div>password: "
+	    + "</div>\r\n<div>password: "
 	    + alias4(((helper = (helper = helpers.password || (depth0 != null ? depth0.password : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"password","hash":{},"data":data}) : helper)))
-	    + "</div>\r\n        <h1>Press to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                from\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n        <button>\r\n                <div class=\"buy button\"></div>\r\n        </button>\r\n        <div class=\"feedback\">\r\n                \r\n        </div>\r\n</div>";
+	    + "</div>\r\n<div class=\"home-page\">\r\n        <h1>Press to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                <p>from</p>\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n</div>\r\n\r\n<div class = \"spacing\"></div>\r\n<div class = \"row\">\r\n        <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves.png\">\r\n        </div>\r\n        \r\n                <div class = \"col-6 col-m-4 col-p-4\">\r\n                        <div class=\"buy button\">\r\n                                <img src = \"/assets/coffeeCup.png\" class = \"cup\" >\r\n                </div>\r\n        </div>\r\n\r\n                <div class = \"col-3 col-m-4 col-p-4\">\r\n                <img src = \"/assets/leaves2.png\">\r\n        </div>\r\n\r\n<div class=\"feedback\">\r\n        \r\n</div>";
 	},"useData":true});
 
 /***/ },
@@ -11542,9 +11549,17 @@
 
 /***/ },
 /* 24 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div class=\"login\" />\n        <h1>Enter Credentials</h1>\n        <input class=\"username\" type=\"username\" />\n        <input class=\"password\" type=\"password\" />\n        <button class=\"button login\" >Login</button>\n</div>";
+	var Handlebars = __webpack_require__(5);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var helper;
+
+	  return "<div class=\"login\" />\r\n        <h1>Enter Credentials</h1>\r\n        <input id=\"username\" type=\"username\" />\r\n        <input id=\"password\" type=\"password\" />\r\n        <button class=\"button login\" >Login</button>\r\n        "
+	    + container.escapeExpression(((helper = (helper = helpers.status || (depth0 != null ? depth0.status : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"status","hash":{},"data":data}) : helper)))
+	    + "\r\n</div>";
+	},"useData":true});
 
 /***/ },
 /* 25 */
@@ -11677,13 +11692,16 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	window.n = _navigate.navigate;
-
 	function create() {
 	        _sockets.socket.on("login", function (auth) {
 	                if (auth.status === "success") {
 	                        (0, _navigate.navigate)("home", auth);
+	                } else {
+	                        (0, _navigate.navigate)("login", auth);
 	                }
+	        });
+	        (0, _jquery2.default)(".button.login").click(function (e) {
+	                (0, _sockets.login)((0, _jquery2.default)("#username").val(), (0, _jquery2.default)("#password").val());
 	        });
 	};
 
