@@ -1,4 +1,5 @@
 import $ from "jquery";
+import all from "./../items.json";
 
 const viewLoader = require.context("./views"),
 	  controllerLoader = require.context("./controllers"),
@@ -10,7 +11,7 @@ export function navigate(path, ctx = {}) {
 	const file = `./${path}`;
 	let template = viewLoader(file+".hbs");
 	if (typeof template === "function") {
-		template = template(ctx);
+		template = template(Object.assign(ctx, all));
 	}
 	pageElement.html(template);
 	if (currentView !== null) {
