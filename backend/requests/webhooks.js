@@ -6,7 +6,7 @@ const webhooks = express.Router();
 webhooks.use(bodyParser.urlencoded());
 
 webhooks.post("/job_done", (req, res) => {
-        console.log(req.rawHeaders);
+        console.log(req.body);
         console.log(JSON.parse(req.body));
         res.end();
 });
