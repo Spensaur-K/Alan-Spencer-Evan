@@ -1,9 +1,9 @@
 const express = require("express");
-const body = require("body-parser-json");
+const body = require("body-parser");
 
 const webhooks = express.Router();
 
-//webhooks.use(body.json());
+webhooks.use(body.text());
 
 webhooks.post("/job_done", (req, res) => {
         //console.log(req);
