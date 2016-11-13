@@ -9,7 +9,12 @@ export function create() {
                 if (auth.status === "success") {
                         navigate("home", auth);
                 }
-        })
+        });
+        $(".button.login").click(e => {
+                login(
+                    $("#username").val(),
+                    $("#password").val()
+                )});
 };
 
 export function destroy() {
