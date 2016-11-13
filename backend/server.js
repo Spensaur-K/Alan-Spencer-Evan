@@ -82,7 +82,9 @@ io.on("connection", function (socket) {
 
     socket.on("login", function (message) {
         User.findOne({username: message.username}).then(function (user) {
-            if (user && user.password == message.password) {
+            console.log(message.password);
+            console.log(user.password);
+            if (user && user.verifyPassword(message.password)) {
                 console.log("Auth success");
                 socket.on("chat", function (message) {
                     socket.broadcast.emit("message", message);
