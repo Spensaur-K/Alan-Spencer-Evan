@@ -10401,8 +10401,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = function () {
+
+	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
-	                (0, _sockets.order)();
+	                (0, _sockets.order)({
+	                        type: "coffee",
+	                        from: "somehwere (timmies)"
+	                });
 	        });
 	};
 
@@ -10414,11 +10419,8 @@
 
 	var socket = io.connect();
 
-	exports.order = function () {
-	        socket.emit("order", {
-	                type: "coffee",
-	                from: "Tim Hortens"
-	        });
+	exports.order = function (req) {
+	        socket.emit("order", req);
 	};
 
 /***/ },
