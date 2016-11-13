@@ -1,7 +1,7 @@
 var request = require('request-promise-native');
 
 var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
-var googlekey = process.env.GOOGLE_API_KEY;
+var googlekey = process.env.GOOGLE_KEY;
 
 
 
