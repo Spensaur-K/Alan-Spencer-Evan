@@ -18,5 +18,5 @@ webhooks.use(bodyParser.raw());
 
 
 webhooks.post("/job_change", (req, res, next) => {
-        hookEvents.emit("job_change");
+        webhooks.hookEvents.emit("job_change");
 });
