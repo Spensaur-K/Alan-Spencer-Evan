@@ -3,9 +3,16 @@ import { order, socket } from "./../sockets";
 import loading from "./../loading";
 
 export function create() {
+        $("#creme").val(100/7)
+        $("#sugar").val(100/7)
+
         $("#creme-display").height(($("#creme").val()/100)*900);
         $("#creme").on("input", e => {
                 $("#creme-display").height(($("#creme").val()/100)*900)
+        });
+        $("#sugar-display").height(($("#sugar").val()/100)*900);
+        $("#sugar").on("input", e => {
+                $("#sugar-display").height(($("#sugar").val()/100)*900)
         });
         socket.on("jobcreate", (jid) => {
                 loading.off();
@@ -27,7 +34,7 @@ export function create() {
                                         var long = position.coords.longitude;
 
                                         order({
-                                                type: `${$("#coffee").val()} coffee with ${($("#creme").val()/100)*7} creme`,
+                                                type: `${$("#coffee").val()} coffee with ${($("#creme").val()/100)*7} creme and ${($("#sugar").val()/100)*7} sugar`,
                                                 from: $("#shop").val(),
                                                 lat: lat,
                                                 long: long

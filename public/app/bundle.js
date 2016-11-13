@@ -11627,9 +11627,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function create() {
+	        (0, _jquery2.default)("#creme").val(100 / 7);
+	        (0, _jquery2.default)("#sugar").val(100 / 7);
+
 	        (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
 	        (0, _jquery2.default)("#creme").on("input", function (e) {
 	                (0, _jquery2.default)("#creme-display").height((0, _jquery2.default)("#creme").val() / 100 * 900);
+	        });
+	        (0, _jquery2.default)("#sugar-display").height((0, _jquery2.default)("#sugar").val() / 100 * 900);
+	        (0, _jquery2.default)("#sugar").on("input", function (e) {
+	                (0, _jquery2.default)("#sugar-display").height((0, _jquery2.default)("#sugar").val() / 100 * 900);
 	        });
 	        _sockets.socket.on("jobcreate", function (jid) {
 	                _loading2.default.off();
@@ -11651,7 +11658,7 @@
 	                                        var long = position.coords.longitude;
 
 	                                        (0, _sockets.order)({
-	                                                type: (0, _jquery2.default)("#coffee").val() + " coffee with " + (0, _jquery2.default)("#creme").val() / 100 * 7 + " creme",
+	                                                type: (0, _jquery2.default)("#coffee").val() + " coffee with " + (0, _jquery2.default)("#creme").val() / 100 * 7 + " creme and " + (0, _jquery2.default)("#sugar").val() / 100 * 7 + " sugar",
 	                                                from: (0, _jquery2.default)("#shop").val(),
 	                                                lat: lat,
 	                                                long: long
