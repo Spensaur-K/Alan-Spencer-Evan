@@ -11,7 +11,7 @@ process.env.PORT = process.env.PORT || 3000;
 
 var mongoose = require('mongoose');
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/favourize');
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/favourize');
 var User = require('./models/user');
 
 var db = mongoose.connection;
