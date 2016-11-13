@@ -14,6 +14,7 @@ var io = require("socket.io")(server);
 var path = require("path");
 var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
+const field = require("./requests/customFields");
 
 
 const socketToJobs = new WeakMap();
@@ -25,7 +26,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 
 io.on("connection", function(socket) {
-    const jobStorage = new Set;
+    const jobStorage = {
+        awaitingPickup: new Set,
+        awaitingDelivery: new Set
+    };
     socketToJobs.set(socket, jobStorage);
 
     socket.on("chat", function(message) {
@@ -37,15 +41,24 @@ io.on("connection", function(socket) {
         console.log(order);
         jobs.createJob(order)
         .then(({ job }) => {
-            jobStorage.add(job.id);
+            jobStorage.awaitingPickup.add(job.id);
+            socket.emit("jobcreate", job.id);
         });
-        //socket.broadcast.emit("order", number);
     });
 
     webhooks.hookEvents.on("job_change", () => {
         // TODO slow af, get actual data from hook
-        jobs.getJobs().then(jobRes => {
-            debugger;
+        jobs.getJobs().then((jobsResponse) => {
+            for (const job of jobsResponse.jobs) {
+                if (jobStorage.awaitingPickup.has(job.id)) {
+                    const pickedUp = field("Picked Up", job.custom_field_values);
+                    if (pickedUp == "true") {
+                        jobStorage.awaitingPickup.delete(job.id)
+                        jobStorage.awaitingDelivery.add(job.id)
+                        socket.emit("pickup", job.id);
+                    }
+                }
+            }
         });
     });
 
