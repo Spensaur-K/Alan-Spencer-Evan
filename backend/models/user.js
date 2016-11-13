@@ -7,7 +7,7 @@ var schema = mongoose.Schema({
     username: {type: String, required: true, index: {unique : true}},
     password: {type: String, required: true},
     name: String,
-    id: String
+    id: Number
 });
 
 schema.pre('save', function(next) {
