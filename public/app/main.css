@@ -1,15 +1,33 @@
 /*!
  * --------------------------------------------------------------------------------
  * Author: Spencer Killen & Alan Yong
- * Date: Sat Nov 12 2016
+ * Date: Sun Nov 13 2016
  * --------------------------------------------------------------------------------
  */
+body {
+  width: 100%;
+  margin: auto;
+  background: #EB712F; }
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: auto; }
+
+[class*="col-"] {
+  width: 100%;
+  float: left;
+  padding: 15px; }
+
+.spacing {
+  height: 300px; }
+
 .buy.button {
-  background-image: url("/assets/coffee.jpg");
-  width: 400px;
-  height: 600px;
+  background-image: url("/assets/coffeeCup.png");
   background-size: cover;
-  display: inline-block; }
+  display: center;
+  background: #EB712F;
+  height: 600px; }
 
 .home-page {
   text-align: center;
@@ -18,3 +36,147 @@
   position: absolute;
   top: 0px;
   height: 0px; }
+
+#coffee {
+  border: solid black 3px;
+  border-radius: 30px;
+  padding: 5px;
+  font-size: 24px; }
+
+#shop {
+  border: solid black 3px;
+  border-radius: 30px;
+  padding: 5px;
+  font-size: 24px; }
+
+p {
+  display: inline-block;
+  padding: 5px;
+  font-size: 24px;
+  color: #333333;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-style: italic; }
+
+h1 {
+  display: inline-block;
+  padding: 5px;
+  font-size: 36px;
+  color: #333333;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-style: italic; }
+
+#mainBut {
+  background: #EB712F;
+  border: solid-black; }
+
+.cup {
+  height: 600px; }
+
+@media only screen and (min-width: 0px) {
+  /* For phones: */
+  .col-p-0 {
+    width: 0%; }
+  .col-p-1 {
+    width: 8.33%; }
+  .col-p-2 {
+    width: 16.66%; }
+  .col-p-3 {
+    width: 25%; }
+  .col-p-4 {
+    width: 33.33%; }
+  .col-p-5 {
+    width: 41.66%; }
+  .col-p-6 {
+    width: 50%; }
+  .col-p-7 {
+    width: 58.33%; }
+  .col-p-8 {
+    width: 66.66%; }
+  .col-p-9 {
+    width: 75%; }
+  .col-p-10 {
+    width: 83.33%; }
+  .col-p-11 {
+    width: 91.66%; }
+  .col-p-12 {
+    width: 100%; } }
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-m-0 {
+    width: 0%; }
+  .col-m-1 {
+    width: 8.33%; }
+  .col-m-2 {
+    width: 16.66%; }
+  .col-m-3 {
+    width: 25%; }
+  .col-m-4 {
+    width: 33.33%; }
+  .col-m-5 {
+    width: 41.66%; }
+  .col-m-6 {
+    width: 50%; }
+  .col-m-7 {
+    width: 58.33%; }
+  .col-m-8 {
+    width: 66.66%; }
+  .col-m-9 {
+    width: 75%; }
+  .col-m-10 {
+    width: 83.33%; }
+  .col-m-11 {
+    width: 91.66%; }
+  .col-m-12 {
+    width: 100%; } }
+
+@media only screen and (min-width: 1200px) {
+  /* for DeskTops: */
+  .col-0 {
+    width: 0%; }
+  .col-1 {
+    width: 8.33%; }
+  .col-2 {
+    width: 16.66%; }
+  .col-3 {
+    width: 25%; }
+  .col-4 {
+    width: 33.33%; }
+  .col-5 {
+    width: 41.66%; }
+  .col-6 {
+    width: 50%; }
+  .col-7 {
+    width: 58.33%; }
+  .col-8 {
+    width: 66.66%; }
+  .col-9 {
+    width: 75%; }
+  .col-10 {
+    width: 83.33%; }
+  .col-11 {
+    width: 91.66%; }
+  .col-12 {
+    width: 100%; } }
+
+.row:after {
+  content: "";
+  clear: both;
+  display: block; }
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform; }
+
+* {
+  box-sizing: border-box; }
