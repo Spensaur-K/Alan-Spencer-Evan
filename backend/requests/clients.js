@@ -9,7 +9,7 @@ const HEADERS = {
     'X-API-ACCESS-TOKEN': accesstoken
 };
 
-module.exports.createCustomer = function({ first, last }, cid) {
+module.exports.createCustomer = function({ first, last }) {
         const client = {
                 "client": {
                         "first_name": first,
