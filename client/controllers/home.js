@@ -1,8 +1,13 @@
 import $ from "jquery";
-import { order } from "./../sockets";
+import { order, socket } from "./../sockets";
 
-module.exports = () => {
-
+export function create() {
+        socket.on("jobcreate", (jid) => {
+                $(".feedback").append(`Job with id ${jid} created successfully`);
+        })
+        socket.on("pickup", jid => {
+                $(".feedback").append(`Job with id ${jid} was just picked up`);
+        });
         //clc location
         $(".buy.button").click(e => {
 
@@ -36,5 +41,9 @@ module.exports = () => {
         });
 };
 
+export function destroy() {
+        socket.off("pickup");
+        socket.off("jobcreate");
+}
 
 

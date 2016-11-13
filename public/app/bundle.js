@@ -10362,7 +10362,7 @@
 /* 4 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"home-page\">\r\n        <h1>Press to order Coffee</h1>\r\n        <button>\r\n                <div class=\"buy button\"></div>\r\n        </button>\r\n        <div class=\"feedback\">\r\n                \r\n        </div>\r\n</div>";
+	module.exports = "<div class=\"home-page\">\r\n        <h1>Press to order</h1>\r\n        <div class=\"sel\">\r\n                <select id=\"coffee\">\r\n                        <option value=\"Black\">Black</option>\r\n                        <option value=\"Double Double\">Double Double</option>\r\n                </select>\r\n                from\r\n                <select id=\"shop\">\r\n                        <option value=\"Timmy's\">Timmy's</option>\r\n                        <option value=\"Not Timmy's\">Not Timmy's</option>\r\n                </select>\r\n        </div>\r\n        <button>\r\n                <div class=\"buy button\"></div>\r\n        </button>\r\n        <div class=\"feedback\">\r\n                \r\n        </div>\r\n</div>";
 
 /***/ },
 /* 5 */
@@ -10392,6 +10392,12 @@
 
 	"use strict";
 
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+	exports.create = create;
+	exports.destroy = destroy;
+
 	var _jquery = __webpack_require__(2);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
@@ -10400,8 +10406,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	module.exports = function () {
-
+	function create() {
+	        _sockets.socket.on("jobcreate", function (jid) {
+	                (0, _jquery2.default)(".feedback").append("Job with id " + jid + " created successfully");
+	        });
+	        _sockets.socket.on("pickup", function (jid) {
+	                (0, _jquery2.default)(".feedback").append("Job with id " + jid + " was just picked up");
+	        });
 	        //clc location
 	        (0, _jquery2.default)(".buy.button").click(function (e) {
 
@@ -10411,8 +10422,8 @@
 	                                var long = position.coords.longitude;
 
 	                                (0, _sockets.order)({
-	                                        type: "coffee",
-	                                        from: "somehwere (timmies)",
+	                                        type: (0, _jquery2.default)("#coffee").val(),
+	                                        from: (0, _jquery2.default)("#shop").val(),
 	                                        lat: lat,
 	                                        long: long
 	                                });
@@ -10431,17 +10442,26 @@
 	        });
 	};
 
+	function destroy() {
+	        _sockets.socket.off("pickup");
+	        _sockets.socket.off("jobcreate");
+	}
+
 /***/ },
 /* 7 */
 /***/ function(module, exports) {
 
 	"use strict";
 
-	var socket = io.connect();
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+	exports.order = order;
+	var socket = exports.socket = io.connect();
 
-	exports.order = function (req) {
+	function order(req) {
 	        socket.emit("order", req);
-	};
+	}
 
 /***/ },
 /* 8 */
