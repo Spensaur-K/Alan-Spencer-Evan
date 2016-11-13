@@ -17,7 +17,31 @@ module.exports.createJob = function(req, cid) {
             scheduling_details: "Order " + req.type + " from " + req.from,
             schedule_type: "one-off",
             job_type: "one-off",
-            property: property.id
+            property: property.id,
+            line_items: [
+                {
+                    name: "coffee",
+                    description: req.coffee_d + ' from ' + req.from,
+                    qty: 1,
+                    unit_cost: 5.00,
+                    cost: 5.00
+                },
+                {
+                    name: "cream",
+                    description: "Apparently, CoffeeMate",
+                    qty: req.cream_q,
+                    unit_cost: 0.10,
+                    cost: req.cream_q * 0.10
+                },
+                {
+                    name: "sugar",
+                    description: "Sucrose or other natural things",
+                    qty: req.sugar_q,
+                    unit_cost: 0.10,
+                    cost: req.sugar_q * 0.10
+                },
+
+            ]
         }};
 
         return request({

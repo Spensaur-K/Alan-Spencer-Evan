@@ -71,8 +71,8 @@ io.on("connection", function (socket) {
 
     function loggin(message) {
         User.findOne({username: message.username}).then(function (user) {
-            socket.cid = user.id;
             if (user && user.verifyPassword(message.password)) {
+                socket.cid = user.id;
                 console.log("Auth success");
                 socket.on("chat", function (message) {
                     socket.broadcast.emit("message", message);
@@ -111,7 +111,7 @@ io.on("connection", function (socket) {
                 socket.emit("login", {status: 'success', username: user.username});
             } else {
                 console.log("Auth failed");
-                socket.emit("login", {status: 'You need to be spencer and have password password1'});
+                socket.emit("login", {status: 'Invalid username/password'});
             }
         });
     }
