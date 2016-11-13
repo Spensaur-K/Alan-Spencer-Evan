@@ -1,6 +1,6 @@
 try {
     var dotenv = require("dotenv").config();
-} catch(error) {
+} catch (error) {
     // just for Spencer
 }
 
@@ -25,49 +25,56 @@ app.use("/webhooks", webhooks);
 app.use(express.static(path.join(__dirname, "../public")));
 
 
-
-io.on("connection", function(socket) {
+io.on("connection", function (socket) {
     const jobStorage = {
         awaitingPickup: new Set,
         awaitingDelivery: new Set
     };
     socketToJobs.set(socket, jobStorage);
 
-    socket.on("chat", function(message) {
-    	socket.broadcast.emit("message", message);
-    });
+    socket.on("login", function (message) {
+        if (message.username == 'spencer' && message.password == 'password1') {
+            console.log("Auth success");
+            socket.on("chat", function (message) {
+                socket.broadcast.emit("message", message);
+            });
 
-    socket.on("order", function(order) {
+            socket.on("order", function (order) {
 
-        console.log(order);
-        jobs.createJob(order)
-        .then(({ job }) => {
-            jobStorage.awaitingPickup.add(job.id);
-            socket.emit("jobcreate", job.id);
-        });
-    });
+                console.log(order);
+                jobs.createJob(order)
+                    .then(({job}) => {
+                        jobStorage.awaitingPickup.add(job.id);
+                        socket.emit("jobcreate", job.id);
+                    });
+            });
 
-    webhooks.hookEvents.on("job_change", () => {
-        // TODO slow af, get actual data from hook's post req
-        jobs.getJobs().then((jobsResponse) => {
-            for (const job of jobsResponse.jobs) {
-                if (jobStorage.awaitingPickup.has(job.id)) {
-                    const pickedUp = field("Picked Up", job.custom_field_values);
-                    if (psuedobool(pickedUp)) {
-                        jobStorage.awaitingPickup.delete(job.id)
-                        jobStorage.awaitingDelivery.add(job.id)
-                        socket.emit("pickup", job.id);
+            webhooks.hookEvents.on("job_change", () => {
+                // TODO slow af, get actual data from hook's post req
+                jobs.getJobs().then((jobsResponse) => {
+                    for (const job of jobsResponse.jobs) {
+                        if (jobStorage.awaitingPickup.has(job.id)) {
+                            const pickedUp = field("Picked Up", job.custom_field_values);
+                            if (psuedobool(pickedUp)) {
+                                jobStorage.awaitingPickup.delete(job.id)
+                                jobStorage.awaitingDelivery.add(job.id)
+                                socket.emit("pickup", job.id);
+                            }
+                        } else if (jobStorage.awaitingDelivery.has(job.id)) {
+                            if (psuedobool(job.closed)) {
+                                jobStorage.awaitingDelivery.delete(job.id)
+                                socket.emit("delivery", job.id);
+                            }
+                        }
                     }
-                } else if (jobStorage.awaitingDelivery.has(job.id)) {
-                    if (psuedobool(job.closed)) {
-                        jobStorage.awaitingDelivery.delete(job.id)
-                        socket.emit("delivery", job.id);
-                    }
-                }
-            }
-        });
+                })
+            });
+            socket.emit("login", {status: 'success', username: 'spencer'});
+        } else {
+            console.log("Auth failed");
+            socket.emit("login", {status: 'You need to be spencer and have password password1'});
+        }
     });
-
 });
 
 console.log("Starting Socket App - http://localhost:" + process.env.PORT);
