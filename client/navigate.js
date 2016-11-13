@@ -8,7 +8,7 @@ let currentView = null;
 
 export function navigate(path, ctx = {}) {
 	const file = `./${path}`;
-	let template = viewLoader(file);
+	let template = viewLoader(file+".hbs");
 	if (typeof template === "function") {
 		template = template(ctx);
 	}
@@ -18,4 +18,8 @@ export function navigate(path, ctx = {}) {
 	}
 	controllerLoader(file).create(ctx);
 	currentView = path;
+}
+
+export function refresh(path, ctx = {}) {
+	navigate(path, ctx);
 }
