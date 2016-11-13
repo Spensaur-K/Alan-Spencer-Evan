@@ -19,14 +19,16 @@ db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', function () {
     console.log("Worked!");
     var testUser = new User({
-        username: 'spencer',
+        username: 'spencer2',
         password: 'password1',
         id: '12345',
         name: 'Spencer'
     });
-
-    testUser.save().catch(function (err) {
-        throw err;
+    User.findOne({username: testUser.username}).then(function(user) {
+        if (!user)
+            testUser.save().catch(function(err) { throw err; });
+        else
+            console.log(testUser.username + ' already existed in db');
     });
 });
 
@@ -38,33 +40,6 @@ var webhooks = require("./requests/webhooks");
 const field = require("./requests/customFields");
 var items = require("./items.json");
 const psuedobool = require("./requests/psuedobool");
-
-
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-/*
- passport.serializeUser(function(user, done) {
- done(null, user.id);
- });
-
- passport.deserializeUser(function(username, done) {
- User.findOne({username: username}, function(err, user) {
- done(err, user);
- });
- });
- */
-passport.use(new LocalStrategy(function (username, password, done) {
-    User.findOne({username: username}).then(function (user) {
-        if (!user) {
-            return done(null, false, {message: "Unregistered"});
-        }
-
-        if (!user.password != password) {
-            return done(null, false, {message: "Bad password"});
-        }
-
-        return done(null, user);
-    })
-}));
 
 const socketToJobs = new WeakMap();
 
@@ -82,8 +57,6 @@ io.on("connection", function (socket) {
 
     socket.on("login", function (message) {
         User.findOne({username: message.username}).then(function (user) {
-            console.log(message.password);
-            console.log(user.password);
             if (user && user.verifyPassword(message.password)) {
                 console.log("Auth success");
                 socket.on("chat", function (message) {
@@ -120,7 +93,7 @@ io.on("connection", function (socket) {
                         }
                     })
                 });
-                socket.emit("login", {status: 'success', username: 'spencer'});
+                socket.emit("login", {status: 'success', username: user.username});
             } else {
                 console.log("Auth failed");
                 socket.emit("login", {status: 'You need to be spencer and have password password1'});

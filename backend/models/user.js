@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var salt = bcrypt.genSaltSync(10);
 
@@ -18,6 +18,5 @@ schema.pre('save', function(next) {
 schema.methods.verifyPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
-
 
 module.exports = mongoose.model('User', schema);
