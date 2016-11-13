@@ -15,7 +15,7 @@ webhooks.use(bodyParser.json());
 webhooks.post("/job_done", (req, res, next) => {
 
         console.log(typeof req.body);
-        console.log(req.body);
+        console.log(JSON.stringify(req.body));
 });
 
 module.exports = webhooks;
