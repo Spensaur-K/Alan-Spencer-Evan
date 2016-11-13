@@ -1,8 +1,8 @@
 //var coffees = require('coffees.json');
 var request = require('request-promise-native');
+var dotenv = require('dotenv').load();
 
-var accesstoken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcHBfaWQiOiJoYWNrX2VkXzIwMTYiLCJ1c2VyX2lkIjoxOTE2NzUsImFjY291bnRfaWQiOjY1MzQzLCJleHAiOjE0NzkyMzg2NDR9.BXdil7cQx7ChAfXuc_sZHMDzzKEln72HJiwCDsUte5s';
-
+var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
 module.exports.createTask = function(req) {
     var task = { "basicTask" : {
         "title": "Order " + req.type,
@@ -24,5 +24,6 @@ module.exports.createTask = function(req) {
         console.log('Headers:', JSON.stringify(response.headers));
         console.log('Response:', response.body);
         console.log(response);
+        return response;
     });
 };
