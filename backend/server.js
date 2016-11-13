@@ -1,3 +1,9 @@
+try {
+    var dotenv = require("dotenv").config();
+} catch(error) {
+    // just for Spencer
+}
+
 var express = require("express");
 var http = require("http");
 var app = express();
@@ -8,20 +14,18 @@ var io = require("socket.io")(server);
 var path = require("path");
 var jobs = require("./requests/jobs");
 var webhooks = require("./requests/webhooks");
-try {
-    var dotenv = require("dotenv").load();
-} catch(error) {
-    // just for Spencer
-}
 
 
+const socketToJobs = new WeakMap();
 
 app.use("/webhooks", webhooks);
 
 app.use(express.static(path.join(__dirname, "../public")));
 
 
+
 io.on("connection", function(socket) {
+    socketToJobs.set(socket, new Set);
 
     socket.on("chat", function(message) {
     	socket.broadcast.emit("message", message);
@@ -30,7 +34,10 @@ io.on("connection", function(socket) {
     socket.on("order", function(order) {
 
         console.log(order);
-        jobs.createJob(order);
+        jobs.createJob(order)
+        .then((res) => {
+            debugger;
+        });
         //socket.broadcast.emit("order", number);
     });
 	//socket.emit("message", "Welcome to Cyber Chat");

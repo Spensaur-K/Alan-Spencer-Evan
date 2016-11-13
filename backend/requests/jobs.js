@@ -4,7 +4,7 @@ var properties = require('./properties.js');
 var accesstoken = process.env.JOBBER_ACCESS_TOKEN;
 
 module.exports.createJob = function(req) {
-    properties.createProperty({lat: req.lat, long: req.long}).then(function(property) {
+    return properties.createProperty({lat: req.lat, long: req.long}).then(function(property) {
         var task = { job : {
             scheduling_details: "Order " + req.type + " from " + req.from,
             schedule_type: "one-off",
@@ -14,7 +14,7 @@ module.exports.createJob = function(req) {
 
         console.log(task);
 
-        request({
+        return request({
             method: 'POST',
             url: 'https://api.getjobber.com/api/jobs',
             headers: {
