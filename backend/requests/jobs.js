@@ -14,7 +14,7 @@ module.exports.createJob = function(req, cid) {
     return properties.createProperty({lat: req.lat, long: req.long}, cid).then(function(property) {
         console.log('ORDERING HERE!!' + property);
         var task = { job : {
-            scheduling_details: "Order " + req.type + " from " + req.from,
+            scheduling_details: "Order " + req.coffee_d + " from " + req.from,
             schedule_type: "one-off",
             job_type: "one-off",
             property: property.id,
